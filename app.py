@@ -1,7 +1,7 @@
 import os
 
 import secrets
-from flask import Flask, request, redirect, url_for, render_template, flash, session
+from flask import Flask, request, redirect, url_for, render_template, session
 from flask_session import Session
 from cs50 import SQL
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -53,8 +53,7 @@ def signup():
         email_exits = db.execute("SELECT * FROM students WHERE email = ?", email)
         if email_exits:
             flash_message("Email is already exist. Please Login Instead.", category='info')
-            # return redirect(url_for('show_flash'))
-            return
+            return redirect(url_for('show_flash'))
 
         # Secure the password
         hash_password = generate_password_hash(password)
@@ -93,8 +92,7 @@ def login():
         # Check the user input 
         if not email or not password:
             flash_message("Provide required Fields to Log In!", category='error')
-            # return redirect(url_for('show_flash'))
-            return
+            return redirect(url_for('show_flash'))
         
         # Check if the email already exits
         student = db.execute("SELECT * FROM students WHERE email = ?", email)
@@ -102,8 +100,7 @@ def login():
         # Validate the user email and password
         if not student or not (check_password_hash(student[0]["password"], password) if student else True):
             flash_message("Invalid email or password!", category='error')
-            # return redirect(url_for('show_flash'))
-            return
+            return redirect(url_for('show_flash'))
         
         # Store user id in session
         session["user_id"] = student[0]["id"]
