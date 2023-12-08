@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Flash Messages
+{% endblock %}
+
+{% block flash_messages %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-container">
+                {% for message in messages %}
+                <div class="flash-message bg-green-500 text-white p-4 mb-4 rounded">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+{% endblock %}

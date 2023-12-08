@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block logIn %}
+<div class="bg-gray-200 p-8 rounded-lg w-[50%] max-w-sm text-center">
+    <h1 class="text-5xl font-bold mb-4 justify-center flex items-center">Log In</h1>
+    <p class="text-gray-600 mb-4 justify-center flex items-center">Provide email and password</p>
+
+    <!-- Include flash messages here -->
+    {% block flash_messages %}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-container">
+                    {% for message in messages %}
+                    <div class="flash-message bg-green-500 text-white p-4 mb-4 rounded">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    {% endblock %}
+
+    <form action="/login" method="post" class="login-form">
+        <div class="mb-4">
+            <input type="email" class="w-full p-4 rounded-full bg-[#D6F2FE] placeholder-black" id="email" name="email"
+                placeholder="Email" autofocus autocomplete="email">
+        </div>
+        <div class="mb-6">
+            <input type="password" class="w-full p-4 rounded-full bg-[#D6F2FE] placeholder-black" id="password"
+                name="password" placeholder="Password">
+        </div>
+        <button type="submit"
+            class="w-full p-4 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200">Log
+            In</button>
+    </form>
+</div>
+    <!-- FLASH MESSAGES ON LOGIN PAGE -->
+    {% block flash_messages %}
+    {% endblock %}
+
+{% endblock %}
