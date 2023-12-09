@@ -10,6 +10,17 @@
 
     <!-- Show flash messages here -->
     {% block flash_messages %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="flash-container">
+        {% for message, category in messages %}
+        <div class="flash-message {{ get_message_style_class(category) }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
     {% endblock %}
 
     <h1 class="text-5xl font-bold mb-4 justify-center flex items-center">Sign Up</h1>

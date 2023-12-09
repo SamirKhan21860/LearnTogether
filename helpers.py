@@ -4,7 +4,8 @@ from functools import wraps
 import secrets, re
 
 def flash_message(message, category='info'):
-    flash(message, category=category)
+    # flash(message, category=category)
+    flash((message, category), category=category)
 
 def check_required_fields(fields):
     missing_fields = [field for field, value in fields.items() if not value]

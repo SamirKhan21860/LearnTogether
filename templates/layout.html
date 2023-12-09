@@ -96,22 +96,8 @@
     <!-- FLASH MESSAGES -->
     <div class="absolute w-full mt-4 pl-20 pr-20 pb-20 flex items-center justify-center">
         {% block flash_messages %}
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <div class="flash-container">
-                        {% for message, category in messages %}
-                            <div class="flash-message {{ get_message_style_class(category) }}">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            {% endwith %}
         {% endblock %}
     </div>
-    <script>
-        get_message_style_class()
-    </script>
 
     <!-- Index TEMPLATE -->
     <div class="log-in absolute w-full mt-4 pl-20 pr-20 pb-20 flex items-center justify-center">
