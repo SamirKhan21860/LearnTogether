@@ -14,6 +14,9 @@ app.config["SESSION_TYPE"] = "filesystem"
 app.secret_key = generate_secret_key(64)
 Session(app)
 
+# Sever static files
+app.config["STATIC_FOLDER"] = "static"
+
 # SQL Database for sudents
 db = SQL("sqlite:///learntogether.db")
 
@@ -98,7 +101,7 @@ def login():
         student = db.execute("SELECT * FROM students WHERE email = ?", email)
         
         # Validate the user email and password
-        if not student or not (check_password_hash(student[0]["password"], password) if student else True):
+        if not student or not check_password_hash(student[0]["password"], password):
             flash_message("Invalid email or password!", category='error')
             return redirect(url_for('show_flash'))
         

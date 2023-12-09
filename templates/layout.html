@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script> -->
     <title>Student: {% block title %}{% endblock %}</title>
 </head>
 
@@ -94,6 +96,17 @@
     <!-- FLASH MESSAGES -->
     <div class="absolute w-full mt-4 pl-20 pr-20 pb-20 flex items-center justify-center">
         {% block flash_messages %}
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-container">
+                        {% for message, category in messages %}
+                            <div class="flash-message {{ get_message_style_class(category) }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
         {% endblock %}
     </div>
     <script>
@@ -105,12 +118,6 @@
         {% block index %}
         {% endblock %}
     </div>
-
-    <script>
-        document.getElementById('burger-menu').addEventListener('click', function () {
-            document.getElementById('burger-menu-content').classList.toggle('hidden');
-        });
-    </script>
 
     {% block javascript %}
     <script>
@@ -131,6 +138,13 @@
         }
     </script>
     {% endblock %}
+
+    <!-- Include script.js at the end of the body -->
+    <script>
+        document.getElementById('burger-menu').addEventListener('click', function () {
+            document.getElementById('burger-menu-content').classList.toggle('hidden');
+        });
+    </script>
 
 </body>
 
