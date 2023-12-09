@@ -6,15 +6,15 @@
 
 {% block flash_messages %}
     {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="flash-container">
-                {% for message in messages %}
-                <div class="flash-message bg-green-500 text-white p-4 mb-4 rounded">
-                    {{ message }}
-                </div>
-                {% endfor %}
-            </div>
-        {% endif %}
+    {% if messages %}
+    <div class="flash-container">
+        {% for message, category in messages %}
+        <div class="flash-message {{ get_message_style_class(category) }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
     {% endwith %}
 
 {% endblock %}
