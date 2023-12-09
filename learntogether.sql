@@ -1,5 +1,6 @@
+-- Students
 CREATE TABLE students (
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     full_name TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL,
@@ -10,36 +11,69 @@ CREATE TABLE students (
     profile_image_url TEXT
 );
 
--- Add this to learntogether.sql
-CREATE TABLE assignments (
+-- Announcements
+CREATE TABLE announcements (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL,
+    posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    author TEXT
+);
+
+-- Upcoming Events
+CREATE TABLE upcoming_events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    event_name TEXT NOT NULL,
+    event_date DATE NOT NULL,
+    location TEXT,
+    description TEXT
+);
+
+-- Assignment Reminders
+CREATE TABLE assignment_reminders (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER,
-    class_name TEXT,
-    assignment_name TEXT,
-    deadline DATETIME,
+    assignment_name TEXT NOT NULL,
+    due_date DATE NOT NULL,
     reminder_time DATETIME,
     FOREIGN KEY (user_id) REFERENCES students(id)
 );
 
+-- Exam Schedules
+CREATE TABLE exam_schedules (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    exam_name TEXT NOT NULL,
+    exam_date DATE NOT NULL,
+    exam_time TIME NOT NULL,
+    exam_room TEXT
+);
 
--- -- Table for Classes
--- CREATE TABLE classes (
---     id INTEGER PRIMARY KEY AUTOINCREMENT,
---     user_id INTEGER,
---     class_name TEXT,
---     schedule TEXT,
---     UNIQUE(user_id, class_name)
--- );
+-- Important School Updates
+CREATE TABLE school_updates (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    update_title TEXT NOT NULL,
+    update_content TEXT NOT NULL,
+    posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
--- -- Table for Assignments
--- CREATE TABLE assignments (
---     id INTEGER PRIMARY KEY AUTOINCREMENT,
---     user_id INTEGER,
---     class_id INTEGER,
---     assignment_name TEXT,
---     deadline DATETIME,
---     UNIQUE(user_id, assignment_name)
--- );
+-- Scholarship Opportunities
+CREATE TABLE scholarship_opportunities (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    scholarship_title TEXT NOT NULL,
+    deadline DATE NOT NULL,
+    requirements TEXT NOT NULL
+);
+
+-- Internship/Job Opportunities
+CREATE TABLE job_opportunities (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    opportunity_title TEXT NOT NULL,
+    company_name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
 
 -- .save and .read: Save and load SQL commands from a file.
 
