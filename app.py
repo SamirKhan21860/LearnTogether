@@ -123,10 +123,29 @@ def logout():
     # session["user_id"] = None
     return redirect("/login")
 
+
+@app.route("/classes")
+@login_required
+def classes():
+    return render_template("classes.html")
+
+
 @app.route("/assign")
 @login_required
 def assign():
-    return redirect(url_for("login"))
+    return render_template("assignments.html")
+
+
+@app.route("/exams")
+@login_required
+def exams():
+    return render_template("exams.html")
+
+
+@app.route("/messages")
+@login_required
+def messages():
+    return render_template("messages.html")
 
 
 @app.route("/show_flash")
