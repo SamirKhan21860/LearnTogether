@@ -18,3 +18,5 @@ function get_message_style_class(category) {
 document.getElementById('burger-menu').addEventListener('click', function () {
     document.getElementById('burger-menu-content').classList.toggle('hidden');
 });
+
+z
