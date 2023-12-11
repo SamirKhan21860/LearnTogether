@@ -3,3 +3,29 @@
     border: 1px solid #995050;
     margin: 0;   
 } */
+
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #4a5568;
+    /* Tailwind CSS indigo color */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.dropdown-item {
+    padding: 8px 16px;
+    color: #ffffff;
+    /* Tailwind CSS white color */
+    display: block;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.dropdown-item:hover {
+    background-color: #2d3748;
+    /* Tailwind CSS gray-darker color on hover */
+}

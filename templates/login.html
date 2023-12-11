@@ -5,24 +5,26 @@
 {% endblock %}
 
 {% block logIn %}
-<div class="bg-gray-200 p-8 rounded-lg w-[50%] max-w-sm text-center">
+<body class="bg-[#F2E3B6]">
+    <div class="p-8 rounded-lg w-[50%] max-w-sm text-center">
+
+    <!-- Show flash messages here -->
+    {% block flash_messages %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="flash-container">
+        {% for message, category in messages %}
+        <div class="flash-message {{ get_message_style_class(category) }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    {% endblock %}
+
     <h1 class="text-5xl font-bold mb-4 justify-center flex items-center">Log In</h1>
     <p class="text-gray-600 mb-4 justify-center flex items-center">Provide email and password</p>
-
-    <!-- Include flash messages here -->
-    {% block flash_messages %}
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <div class="flash-container">
-                    {% for message in messages %}
-                    <div class="flash-message bg-green-500 text-white p-4 mb-4 rounded">
-                        {{ message }}
-                    </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
-    {% endblock %}
 
     <form action="/login" method="post" class="login-form">
         <div class="mb-4">
@@ -38,8 +40,6 @@
             In</button>
     </form>
 </div>
-    <!-- FLASH MESSAGES ON LOGIN PAGE -->
-    {% block flash_messages %}
-    {% endblock %}
+</body>
 
 {% endblock %}
