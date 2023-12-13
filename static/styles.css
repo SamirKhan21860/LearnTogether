@@ -7,25 +7,32 @@
 .dropdown {
     display: none;
     position: absolute;
-    right: 0;
-    top: 100%;
-    background-color: #4a5568;
+    right: 1.2%;
+    padding: 8px;
+    top: 10%;
+    background-color: #F2CB05;
     /* Tailwind CSS indigo color */
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 10;
+    border-radius: 15px;
+    box-shadow: 3px 4px 5px 1px rgba(0, 0, 0, 0.2);
+    z-index: 99;
 }
 
 .dropdown-item {
-    padding: 8px 16px;
-    color: #ffffff;
+    background-color: #E7F2BD;
+    padding: 10px;
+    font-size: 1rem;
+    color: #000;
+    margin: 6px 2px 8px;
+    text-align: center;
     /* Tailwind CSS white color */
     display: block;
+    border-radius: 100px;
     text-decoration: none;
     transition: background-color 0.3s;
 }
 
 .dropdown-item:hover {
     background-color: #2d3748;
+    color: white;
     /* Tailwind CSS gray-darker color on hover */
 }
