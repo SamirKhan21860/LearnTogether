@@ -15,7 +15,7 @@ Flash Messages
     "bg-green-500 text-white" if category == 'success' else
     "bg-gray-500 text-white"
     ) %}
-    <div class="flash-message" style="background: {{ message_style }};">
+    <div class="flash-message hover:bg-gray-800 p-4 mb-4 transition ease-in-out duration-300 rounded-full {{ message_style }}">
         {{ message }}
     </div>
     {% endfor %}
