@@ -1,45 +1,32 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Log In
+Log In
 {% endblock %}
 
 {% block logIn %}
+
 <body class="bg-[#F2E3B6]">
     <div class="p-8 rounded-lg w-[50%] max-w-sm text-center">
+        <h1 class="text-5xl font-bold mb-4 justify-center flex items-center">Log In</h1>
+        <p class="text-gray-600 mb-4 justify-center flex items-center">Provide email and password</p>
 
-    <!-- Show flash messages here -->
-    {% block flash_messages %}
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <div class="flash-container">
-        {% for message, category in messages %}
-        <div class="flash-message {{ get_message_style_class(category) }}">
-            {{ message }}
-        </div>
-        {% endfor %}
+        <form action="/login" method="post" class="login-form">
+            <div class="mb-4">
+                <input type="email"
+                    class="w-64 p-4 rounded-full hover:bg-[#f2f2f2] bg-[#D6F2FE] placeholder-black transition duration-300"
+                    id="email" name="email" placeholder="Email" autofocus autocomplete="email">
+            </div>
+            <div class="mb-6">
+                <input type="password"
+                    class="w-56 p-4 rounded-full hover:bg-[#f2f2f2] bg-[#D6F2FE] placeholder-black transition duration-300"
+                    id="password" name="password" placeholder="Password">
+            </div>
+            <button type="submit"
+                class="w-40 p-4 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200 transition duration-300">Log
+                In</button>
+        </form>
     </div>
-    {% endif %}
-    {% endwith %}
-    {% endblock %}
-
-    <h1 class="text-5xl font-bold mb-4 justify-center flex items-center">Log In</h1>
-    <p class="text-gray-600 mb-4 justify-center flex items-center">Provide email and password</p>
-
-    <form action="/login" method="post" class="login-form">
-        <div class="mb-4">
-            <input type="email" class="w-full p-4 rounded-full bg-[#D6F2FE] placeholder-black" id="email" name="email"
-                placeholder="Email" autofocus autocomplete="email">
-        </div>
-        <div class="mb-6">
-            <input type="password" class="w-full p-4 rounded-full bg-[#D6F2FE] placeholder-black" id="password"
-                name="password" placeholder="Password">
-        </div>
-        <button type="submit"
-            class="w-full p-4 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200">Log
-            In</button>
-    </form>
-</div>
 </body>
 
 {% endblock %}
