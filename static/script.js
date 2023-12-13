@@ -1,6 +1,7 @@
 // Define a custom function to assign category-specific styles
 function get_message_style_class(category) {
     // Implement your logic to determine the category and return the corresponding class
+    console.log("Loaded successfully!")
     switch (category) {
         case 'error':
             return 'bg-red-500 text-white';
@@ -18,5 +19,3 @@ function get_message_style_class(category) {
 document.getElementById('burger-menu').addEventListener('click', function () {
     document.getElementById('burger-menu-content').classList.toggle('hidden');
 });
-
-z

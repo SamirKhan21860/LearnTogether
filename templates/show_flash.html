@@ -1,20 +1,25 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Flash Messages
+Flash Messages
 {% endblock %}
 
 {% block flash_messages %}
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="flash-container">
-                {% for message in messages %}
-                <div class="flash-message bg-green-500 text-white p-4 mb-4 rounded">
-                    {{ message[0]}}
-                </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endwith %}
-
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="flash-container">
+    {% for message, category in messages %}
+    {% set message_style = (
+    "bg-red-500 text-white" if category == 'error' else
+    "bg-blue-500 text-white" if category == 'info' else
+    "bg-green-500 text-white" if category == 'success' else
+    "bg-gray-500 text-white"
+    ) %}
+    <div class="flash-message" style="background: {{ message_style }};">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
 {% endblock %}
