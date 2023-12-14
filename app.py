@@ -148,6 +148,12 @@ def messages():
     return render_template("messages.html")
 
 
+@app.route("/complaint")
+@login_required
+def complaint():
+    return render_template("complaint_or_request.html")
+
+
 @app.route("/show_flash")
 def show_flash():
     return render_template('show_flash.html')
