@@ -6,52 +6,43 @@
 
 {% block complaint %}
 
-<body class="bg-[rgb(240,228,252)]">
-    <!-- <div class="container mx-auto">
-    <div class="row">
-        <h1 class="font-mono">Default Route</h1>
-        <div class="overflow-x-auto">
-                <h1>Hello {{ student[0]["full_name"] }}</h1>
-        </div>
-    </div>
-</div> -->
+<body class="bg-[rgb(245,215,180)]">
 
-    <div class="max-w-md mx-auto bg-white p-8 my-4 rounded-md shadow-md">
-        <h2 class="text-2xl font-bold mb-6">Submit a Complaint or Request</h2>
+    <div class="max-w-md mx-auto bg-gray-500 p-8 my-6 rounded-3xl shadow-md">
+        <h2 class="text-2xl font-bold mb-6 text-white">Submit a Complaint or Request</h2>
 
         <form id="complaintForm" action="/complaint" method="POST">
             <div class="mb-4">
-                <label for="submissionType" class="block text-sm font-semibold text-gray-600">Type of
+                <label for="submissionType" class="block text-sm font-semibold text-gray-200 text-white">Type of
                     Submission:</label>
                 <select name="submissionType" id="submissionType" class="w-full mt-1 p-2 border rounded-md">
+                    <option value="" default disabled selected>Select</option>
                     <option value="complaint">Complaint</option>
                     <option value="request">Request</option>
                 </select>
             </div>
 
             <div class="mb-4">
-                <label for="category" class="block text-sm font-semibold text-gray-600">Category:</label>
+                <label for="category" class="block text-sm font-semibold text-gray-200">Category:</label>
                 <select name="category" id="category" class="w-full mt-1 p-2 border rounded-md">
+                    <option value="" default disabled selected>Select Option</option>
                     <option value="academic">Academic</option>
                     <option value="facilities">Facilities</option>
                     <option value="administration">Administration</option>
+                    <option value="exams">Exams</option>
+                    <option value="students">Students</option>
                 </select>
             </div>
 
             <div class="mb-4">
-                <label for="subject" class="block text-sm font-semibold text-gray-600">Subject:</label>
+                <label for="subject" class="block text-sm font-semibold text-gray-200">Subject:</label>
                 <input type="text" name="subject" id="subject" class="w-full mt-1 p-2 border rounded-md">
             </div>
 
             <div class="mb-4">
-                <label for="description" class="block text-sm font-semibold text-gray-600">Description:</label>
+                <label for="description" class="block text-sm font-semibold text-gray-200">Description:</label>
                 <textarea name="description" id="description" rows="4"
                     class="w-full mt-1 p-2 border rounded-md"></textarea>
-            </div>
-
-            <div class="mb-4">
-                <label for="attachment" class="block text-sm font-semibold text-gray-600">Attachment:</label>
-                <input type="file" name="attachment" id="attachment" class="w-full mt-1 p-2 border rounded-md">
             </div>
 
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Submit</button>

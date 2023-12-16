@@ -79,10 +79,12 @@
     </div>
 
     <!-- Index TEMPLATE -->
-    <div class="log-in absolute w-full mt-4 pl-20 pr-20 pb-20 flex items-center justify-center">
-        {% block index %}
-        {% endblock %}
-    </div>
+    {% block index %}
+    {% endblock %}
+
+    <!-- complaint TEMPLATE -->
+    {% block complaint %}
+    {% endblock %}
 
     <!-- Loading the "message" and the "button" functionality-->
     <script src="{{ url_for('static', filename='script.js') }}"></script>

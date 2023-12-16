@@ -1,20 +1,24 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Results
+Results
 {% endblock %}
 
 {% block index %}
 
 <body class="bg-[rgb(240,228,252)]">
-    <div class="container mx-auto">
-    <div class="row">
-        <h1 class="font-mono">Default Route</h1>
-        <div class="overflow-x-auto">
-                <h1>Hello {{ student[0]["full_name"] }}</h1>
+    <div class="log-in absolute w-full mt-4 pl-20 pr-20 pb-20 flex items-center justify-center">
+        <div class="">
+            <h1 class="font-mono">Default Route: Index</h1>
+            <h2>Hello {{ student[0]["full_name"] }}</h2>
         </div>
     </div>
-</div>
+
+    <div class="bg-blue-300 hover:bg-blue-400 p-4 m-4 w-lg h-full">
+            <h2>Complaint / Request</h2>
+            <p>If you have any request or want to complain, Feel free to provide us details</p>
+    </div>
+
 </body>
 
 {% endblock %}

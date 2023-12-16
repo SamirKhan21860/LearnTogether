@@ -1,7 +1,7 @@
 import os
 
 import secrets
-from flask import Flask, request, redirect, url_for, render_template, session
+from flask import Flask, request, redirect, url_for, render_template, session, flash
 from flask_session import Session
 from cs50 import SQL
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -148,9 +148,42 @@ def messages():
     return render_template("messages.html")
 
 
-@app.route("/complaint")
+# Route user for sumbmitting complaints or requests
+@app.route("/complaint", methods=["GET", "POST"] )
 @login_required
 def complaint():
+    
+    # Clear success messages before rendering the page with new error messages
+    flash.clear()
+    
+    if request.method == "POST":
+        # Retrieve user given data
+        submission_type = request.form.get("submissionType")
+        category = request.form.get("category")
+        subject = request.form.get("subject")
+        description = request.form.get("description")
+    
+        # Validate required fields
+        result = check_required_fields({
+            "Submission Type": submission_type,
+            "Category": category,
+            "Subject": subject,
+            "Description": description
+        })
+        
+        # If true, return, otherwise, move forward
+        if result:
+            return result
+        
+        # Now it's time to Insert complaint or request into the database
+        db.execute("INSERT INTO complaints_requests (student_id, submission_type, category, subject, description) VALUES (?, ?, ?, ?, ?)", session["user_id"], submission_type, category, subject, description)
+        
+        # Show success message to the user
+        flash_message("Your Complaint or request submitted successfully!", category="success")
+# No class students can be able to give exams in December it would be better to postpone the exams or should be taken online.
+        # Redirect user to the index or any other appropriate page
+        return redirect(url_for("index"))
+    
     return render_template("complaint_or_request.html")
 
 
