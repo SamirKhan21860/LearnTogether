@@ -1,7 +1,7 @@
 import os
 
 import secrets
-from flask import Flask, request, redirect, url_for, render_template, session, flash
+from flask import Flask, request, redirect, url_for, render_template, session
 from flask_session import Session
 from cs50 import SQL
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -152,10 +152,6 @@ def messages():
 @app.route("/complaint", methods=["GET", "POST"] )
 @login_required
 def complaint():
-    
-    # Clear success messages before rendering the page with new error messages
-    flash.clear()
-    
     if request.method == "POST":
         # Retrieve user given data
         submission_type = request.form.get("submissionType")

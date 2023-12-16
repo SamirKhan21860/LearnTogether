@@ -11,13 +11,35 @@ Results
         <div class="">
             <h1 class="font-mono">Default Route: Index</h1>
             <h2>Hello {{ student[0]["full_name"] }}</h2>
+
+            <!-- Flash messages -->
+            {% with messages = get_flashed_messages() %}
+            {% for message, category in messages %}
+            {% if category == 'success' %}
+            <div id="flash-message" class="flash-message rounded-full bg-green-500 text-white p-4 mb-4">
+                <span class="mr-2">{{ message }}</span>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endwith %}
+
         </div>
     </div>
 
     <div class="bg-blue-300 hover:bg-blue-400 p-4 m-4 w-lg h-full">
-            <h2>Complaint / Request</h2>
-            <p>If you have any request or want to complain, Feel free to provide us details</p>
+        <h2>Complaint / Request</h2>
+        <p>If you have any request or want to complain, Feel free to provide us details</p>
     </div>
+
+    <!-- Include the JavaScript to hide the flash message after a delay -->
+    <script>
+        setTimeout(function () {
+            var flashMessage = document.getElementById('flash-message');
+            if (flashMessage) {
+                flashMessage.style.display = 'none';
+            }
+        }, 5000); // Set the time delay in milliseconds (e.g., 5000ms or 5 seconds)
+    </script>
 
 </body>
 
