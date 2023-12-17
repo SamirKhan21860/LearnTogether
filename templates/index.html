@@ -6,39 +6,58 @@ Results
 
 {% block index %}
 
-<body class="bg-[rgb(240,228,252)]">
-    <div class="log-in absolute w-full mt-4 pl-20 pr-20 pb-20 flex items-center justify-center">
-        <div class="">
-            <h1 class="font-mono">Default Route: Index</h1>
-            <h2>Hello {{ student[0]["full_name"] }}</h2>
-
-            <!-- Flash messages -->
-            {% with messages = get_flashed_messages() %}
-            {% for message, category in messages %}
-            {% if category == 'success' %}
-            <div id="flash-message" class="flash-message rounded-full bg-green-500 text-white p-4 mb-4">
-                <span class="mr-2">{{ message }}</span>
-            </div>
-            {% endif %}
-            {% endfor %}
-            {% endwith %}
-
-        </div>
+<body class="bg-[rgb(240,228,252)] relative">
+    <div class="bg-blue-500 hover:bg-blue-300 rounded-2xl font-sans p-4 m-4">
+        <h1 class="font-mono">Default Route: Index</h1>
+        <h2>Hello {{ student[0]["full_name"] }}</h2>
     </div>
 
-    <div class="bg-blue-300 hover:bg-blue-400 p-4 m-4 w-lg h-full">
+    <div class="bg-blue-300 hover:bg-blue-400 p-4 m-4 w-md h-md">
         <h2>Complaint / Request</h2>
         <p>If you have any request or want to complain, Feel free to provide us details</p>
     </div>
 
+    <!-- Flash messages -->
+    <div class="absolute top-0 right-0">
+        {% with messages = get_flashed_messages() %}
+        {% for message, category in messages %}
+        {% if category == 'success' %}
+        <div id="flash-message" class=" m-4 p-4 hover:bg-green-400 rounded-md bg-green-900 text-white">
+            <span class="mr-2">{{ message }} Login successfull!</span>
+            <button class="text-white font-bold font-mono text-lg" id="close-button" onclick="closeFlashMessage()">X</button>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endwith %}
+    </div>
+
+
+
     <!-- Include the JavaScript to hide the flash message after a delay -->
     <script>
-        setTimeout(function () {
+        /* setTimeout(function () {
             var flashMessage = document.getElementById('flash-message');
             if (flashMessage) {
                 flashMessage.style.display = 'none';
             }
-        }, 5000); // Set the time delay in milliseconds (e.g., 5000ms or 5 seconds)
+            console.log("Message displayed for 3sec")
+        }, 5000); // Set the time delay in milliseconds (e.g., 5000ms or 5 seconds) */
+
+        setTimeout(function () {
+                var flashMessage = document.getElementById('flash-message');
+                if (flashMessage) {
+                    flashMessage.style.transition = 'transform 0.3s ease-in-out';
+                    flashMessage.style.transform = 'translateX(0)';
+                }
+            }, 100); // Small delay for the transition to take effect
+
+        function closeFlashMessage() {
+            var flashMessage = document.getElementById('flash-message');
+            if (flashMessage) {
+                flashMessage.style.transition = 'transform 0.3s ease-in-out';
+                flashMessage.style.transform = 'translateX(110%)';
+            }
+        }
     </script>
 
 </body>
