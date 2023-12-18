@@ -18,27 +18,98 @@ Results
     </div>
 
     <!-- Flash messages -->
-    <div class="absolute top-0 right-0">
-        {% with messages = get_flashed_messages() %}
+    <div id="flash-container" class="absolute top-0 right-0">
+        <!-- {% with messages = get_flashed_messages() %}
         {% for message, category in messages %}
-        <div id="flash-message" class=" m-4 p-4 hover:bg-green-400 rounded-md bg-green-900 text-white">
+        <div id="flash-message" class="m-4 p-4 hover:bg-green-400 rounded-md bg-green-900 text-white">
             <span class="mr-2">{{ message }}</span>
-            <button class="text-white font-bold font-mono text-lg" id="close-button" onclick="closeFlashMessage()">X</button>
+            <button class="text-white font-bold font-mono text-lg" id="close-button"
+                onclick="closeFlashMessage()">X</button>
         </div>
         {% endfor %}
-        {% endwith %}
+        {% endwith %} -->
     </div>
 
+    <!-- Include the JavaScript to handle flash messages -->
+    <script>
+        function showFlashMessage(message, category) {
+            var flashContainer = document.getElementById('flash-container');
 
+            // Create a new flash message element
+            var flashMessage = document.createElement('div');
+            flashMessage.classList.add('m-4', 'p-4', 'hover:bg-green-400', 'rounded-md', 'bg-green-900', 'text-white', 'transition-bg', 'duration-300', 'ease-in-out');
+
+            // Set the content of the flash message
+            flashMessage.innerHTML = `
+                <span class="mr-2">${message}</span>
+                <button class="text-white font-bold font-mono text-lg" onclick="closeFlashMessage(this.parentElement)">X</button>
+            `;
+
+            // Append the flash message to the container
+            flashContainer.appendChild(flashMessage);
+
+            // Add a timeout to automatically remove the flash message after a certain period (e.g., 5000ms or 5 seconds)
+            setTimeout(function () {
+                closeFlashMessage(flashMessage);
+            }, 5000);
+        }
+
+        function closeFlashMessage(flashMessage) {
+            // Slide out the flash message
+            flashMessage.style.transition = 'transform 0.3s ease-in-out';
+            flashMessage.style.transform = 'translateX(110%)';
+
+            // Remove the element from the DOM after the transition completes
+            flashMessage.addEventListener('transitionend', function () {
+                flashMessage.remove();
+            });
+        }
+
+        // Fetch and display Flask flash messages
+        document.addEventListener("DOMContentLoaded", function () {
+            var flashMessages = JSON.parse('{{ get_flashed_messages() | tojson | safe }}');
+
+            if (flashMessages) {
+                flashMessages.forEach(function (message) {
+                    showFlashMessage(message[0], message[1]);
+                });
+            }
+        });
+    </script>
+
+
+    <!-- <script>
+        setTimeout(function () {
+            var flashMessage = document.getElementById('flash-message');
+            if (flashMessage) {
+                flashMessage.style.transition = 'transform 0.3s ease-in-out'; // Add a smooth transition effect
+                flashMessage.style.transform = 'translateX(0)';
+            }
+        }, 100); // Small delay for the transition to take effect
+
+        function closeFlashMessage() {
+            var flashMessage = document.getElementById('flash-message');
+            var divMessage = document.getElementById('flash-container')
+            if (flashMessage) {
+                flashMessage.style.transition = 'transform 0.3s ease-in-out'; // Add a smooth transition effect
+                flashMessage.style.transform = 'translateX(110%)';
+
+                // Remove the element from the DOM after the transition completes
+                flashMessage.addEventListener('transitionend', function () {
+                    divMessage.remove();
+                });
+            }
+        }
+    </script> -->
 
     <!-- Include the JavaScript to hide the flash message after a delay -->
-    <script>
+    <!-- <script>
         setTimeout(function () {
             var flashMessage = document.getElementById('flash-message');
             if (flashMessage) {
                 flashMessage.style.display = 'none';
             }
-            console.log("Message displayed for 3sec")
+            console.log("Message displayed for 5sec")
         }, 5000); // Set the time delay in milliseconds (e.g., 5000ms or 5 seconds)
 
         setTimeout(function () {
@@ -56,7 +127,7 @@ Results
                 flashMessage.style.transform = 'translateX(110%)';
             }
         }
-    </script>
+    </script> -->
 
 </body>
 
