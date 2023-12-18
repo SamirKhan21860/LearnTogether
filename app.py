@@ -49,14 +49,16 @@ def signup():
         
         # Validate Class Name using the helper Function
         if not validate_class_name(class_name):
-            flash_message("Class Name must adhere to the specified convention.")
-            return redirect(url_for('show_flash'))
+            flash_message("Class Name must adhere to the specified convention. i.e(CS50, CS or any acronym)", category='info')
+            # return redirect(url_for('show_flash'))
+            return render_template("singup.html")
         
         # Check if the email already exits
         email_exits = db.execute("SELECT * FROM students WHERE email = ?", email)
         if email_exits:
             flash_message("Email is already exist. Please Login Instead.", category='info')
-            return redirect(url_for('show_flash'))
+            # return redirect(url_for('show_flash'))
+            return render_template("singup.html")
 
         # Secure the password
         hash_password = generate_password_hash(password)
@@ -66,6 +68,7 @@ def signup():
         
         # Show Sign Up successful message to user
         flash_message("Signup successful!", category='success')
+        # return render_template("singup.html")
         
         # Retrieve the newly inserted student's data
         student = db.execute("SELECT * FROM students WHERE email = ?", email)
@@ -94,8 +97,9 @@ def login():
         
         # Check the user input 
         if not email or not password:
-            flash_message("Provide required Fields to Log In!", category='error')
-            return redirect(url_for('show_flash'))
+            flash_message("Provide required Fields to Log In!", category='info')
+            # return redirect(url_for('show_flash'))
+            return render_template("login.html")
         
         # Check if the email already exits
         student = db.execute("SELECT * FROM students WHERE email = ?", email)
@@ -103,7 +107,8 @@ def login():
         # Validate the user email and password
         if not student or not check_password_hash(student[0]["password"], password):
             flash_message("Invalid email or password!", category='error')
-            return redirect(url_for('show_flash'))
+            # return redirect(url_for('show_flash'))
+            return render_template("login.html")
         
         # Store user id in session
         session["user_id"] = student[0]["id"]

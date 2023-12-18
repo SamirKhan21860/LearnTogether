@@ -1,26 +1,32 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Flash Messages
+    Flash Messages
 {% endblock %}
 
 {% block flash_messages %}
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-<div class="flash-container">
-    {% for message, category in messages %}
-    {% set message_style = (
-    "bg-red-500 text-white" if category == 'error' else
-    "bg-blue-500 text-white" if category == 'info' else
-    "bg-green-500 text-white" if category == 'success' else
-    "bg-gray-500 text-white"
-    ) %}
-    <div
-        class="flash-message hover:bg-gray-800 p-4 mb-4 transition ease-in-out duration-300 rounded-full {{ message_style }}">
-        {{ message }}
+<!-- <div class="absolute w-full mt-4 pl-20 pr-20 pb-20 flex items-center justify-center">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="flash-container">
+        {% for message, category in messages %}
+        {% set message_style = (
+        "bg-red-500 text-white" if category == 'error' else
+        "bg-blue-500 text-white" if category == 'info' else
+        "bg-green-500 text-white" if category == 'success' else
+        "bg-gray-500 text-white"
+        ) %}
+        <div
+            class="flash-message hover:bg-gray-800 p-4 mb-4 transition ease-in-out duration-300 rounded-full {{ message_style }}">
+            {{ message }}
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
-{% endif %}
-{% endwith %}
+    {% endif %}
+    {% endwith %}
+</div> -->
+
+<script>
+    
+</script>
 {% endblock %}
