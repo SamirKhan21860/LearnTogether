@@ -17,34 +17,5 @@
 //     }
 // }
 
-document.addEventListener('DOMContentLoaded', function () {
-    console.log("DOM is fully loaded!")
-    // Get the dropdown and button elements
-    var dropdown = document.getElementById('burger-menu-content');
-    var button = document.getElementById('burger-menu');
-
-    if (button) {
 
 
-        // Function to close the dropdown by adding 'hidden' and removing 'block'
-        function closeDropdown() {
-            dropdown.classList.add('hidden');
-            dropdown.classList.remove('block');
-        }
-
-        // Toggle visibility of the dropdown on button click
-        button.addEventListener('click', function (event) {
-            event.stopPropagation(); // Prevent the window click event from firing immediately
-            dropdown.classList.remove('hidden');
-            dropdown.classList.toggle('block');
-        });
-
-        // Close the dropdown when clicking outside of it
-        window.addEventListener('click', function (event) {
-            if (!dropdown.contains(event.target) && !button.contains(event.target)) {
-                closeDropdown();
-            }
-        });
-
-    }
-});

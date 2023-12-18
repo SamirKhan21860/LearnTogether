@@ -7,11 +7,14 @@ Results
 {% block index %}
 
 <body class="bg-[rgb(240,228,252)] relative">
+
+    <!-- User info -->
     <div class="bg-blue-500 hover:bg-blue-300 rounded-2xl font-sans p-4 m-4">
         <h1 class="font-mono">Default Route: Index</h1>
         <h2>Hello {{ student[0]["full_name"] }}</h2>
     </div>
 
+    <!-- Route to the Compalint / Request Page -->
     <div class="bg-blue-300 hover:bg-blue-400 p-4 m-4 w-md h-md">
         <h2>Complaint / Request</h2>
         <p>If you have any request or want to complain, Feel free to provide us details</p>
@@ -19,18 +22,9 @@ Results
 
     <!-- Flash messages -->
     <div id="flash-container" class="absolute top-0 right-0">
-        <!-- {% with messages = get_flashed_messages() %}
-        {% for message, category in messages %}
-        <div id="flash-message" class="m-4 p-4 hover:bg-green-400 rounded-md bg-green-900 text-white">
-            <span class="mr-2">{{ message }}</span>
-            <button class="text-white font-bold font-mono text-lg" id="close-button"
-                onclick="closeFlashMessage()">X</button>
-        </div>
-        {% endfor %}
-        {% endwith %} -->
     </div>
 
-    <!-- Include the JavaScript to handle flash messages -->
+    <!-- Included the JavaScript Logic to handle flash messages dynamically -->
     <script>
         function showFlashMessage(message, category) {
             var flashContainer = document.getElementById('flash-container');
@@ -48,7 +42,7 @@ Results
             // Append the flash message to the container
             flashContainer.appendChild(flashMessage);
 
-            // Add a timeout to automatically remove the flash message after a certain period (e.g., 5000ms or 5 seconds)
+            // The timeout will automatically remove the flash message after 5 seconds
             setTimeout(function () {
                 closeFlashMessage(flashMessage);
             }, 5000);
@@ -76,58 +70,6 @@ Results
             }
         });
     </script>
-
-
-    <!-- <script>
-        setTimeout(function () {
-            var flashMessage = document.getElementById('flash-message');
-            if (flashMessage) {
-                flashMessage.style.transition = 'transform 0.3s ease-in-out'; // Add a smooth transition effect
-                flashMessage.style.transform = 'translateX(0)';
-            }
-        }, 100); // Small delay for the transition to take effect
-
-        function closeFlashMessage() {
-            var flashMessage = document.getElementById('flash-message');
-            var divMessage = document.getElementById('flash-container')
-            if (flashMessage) {
-                flashMessage.style.transition = 'transform 0.3s ease-in-out'; // Add a smooth transition effect
-                flashMessage.style.transform = 'translateX(110%)';
-
-                // Remove the element from the DOM after the transition completes
-                flashMessage.addEventListener('transitionend', function () {
-                    divMessage.remove();
-                });
-            }
-        }
-    </script> -->
-
-    <!-- Include the JavaScript to hide the flash message after a delay -->
-    <!-- <script>
-        setTimeout(function () {
-            var flashMessage = document.getElementById('flash-message');
-            if (flashMessage) {
-                flashMessage.style.display = 'none';
-            }
-            console.log("Message displayed for 5sec")
-        }, 5000); // Set the time delay in milliseconds (e.g., 5000ms or 5 seconds)
-
-        setTimeout(function () {
-                var flashMessage = document.getElementById('flash-message');
-                if (flashMessage) {
-                    flashMessage.style.transition = 'transform 0.3s ease-in-out';
-                    flashMessage.style.transform = 'translateX(0)';
-                }
-            }, 100); // Small delay for the transition to take effect
-
-        function closeFlashMessage() {
-            var flashMessage = document.getElementById('flash-message');
-            if (flashMessage) {
-                flashMessage.style.transition = 'transform 0.3s ease-in-out';
-                flashMessage.style.transform = 'translateX(110%)';
-            }
-        }
-    </script> -->
 
 </body>
 
