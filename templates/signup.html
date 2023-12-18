@@ -1,38 +1,126 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Sign Up
+Sign Up
 {% endblock %}
 
 {% block signUp %}
+
 <body class="bg-[#F2E3B6]">
+    <div class="absolute w-full mt-4 pl-20 pr-20 pb-20 flex items-center justify-center">
+        <div class="p-8 rounded-3xl w-[50%] max-w-sm text-center">
 
-<div class="p-8 rounded-3xl w-[50%] max-w-sm text-center">
+            <h1 class="text-5xl font-bold mb-4 justify-center flex items-center">Sign Up</h1>
+            <p class="text-gray-600 mb-4 justify-center flex items-center">Provide email and password</p>
 
-    <h1 class="text-5xl font-bold mb-4 justify-center flex items-center">Sign Up</h1>
-    <p class="text-gray-600 mb-4 justify-center flex items-center">Provide email and password</p>
+            <form action="/signup" method="post" class="login-form">
+                <div class="mb-4">
+                    <input type="text" autofocus class="w-full p-4 rounded-full bg-[#D6F2FE] placeholder-black"
+                        id="name" name="full_name" placeholder="Full Name">
+                </div>
+                <div class="mb-4">
+                    <input type="email" class="w-full p-4 rounded-full bg-[#D6F2FE] placeholder-black" id="email"
+                        name="email" placeholder="Email">
+                </div>
+                <div class="mb-6">
+                    <input type="password" class="w-full p-4 rounded-full bg-[#D6F2FE] placeholder-black" id="password"
+                        name="password" placeholder="Password">
+                </div>
+                <div class="mb-6">
+                    <input type="text" class="w-full p-4 rounded-full bg-[#D6F2FE] placeholder-black" id="class"
+                        name="class" placeholder="Class Name / Subject">
+                </div>
+                <button type="submit"
+                    class="w-full p-4 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200">Sign
+                    Up</button>
+            </form>
+        </div>
+    </div>
 
-    <form action="/signup" method="post" class="login-form">
-        <div class="mb-4">
-            <input type="text" autofocus class="w-full p-4 rounded-full bg-[#D6F2FE] placeholder-black" id="name" name="full_name"
-                placeholder="Full Name">
-        </div>
-        <div class="mb-4">
-            <input type="email" class="w-full p-4 rounded-full bg-[#D6F2FE] placeholder-black" id="email" name="email"
-                placeholder="Email">
-        </div>
-        <div class="mb-6">
-            <input type="password" class="w-full p-4 rounded-full bg-[#D6F2FE] placeholder-black" id="password" name="password"
-                placeholder="Password">
-        </div>
-        <div class="mb-6">
-            <input type="text" class="w-full p-4 rounded-full bg-[#D6F2FE] placeholder-black" id="class" name="class"
-                placeholder="Class Name / Subject">
-        </div>
-        <button type="submit"
-            class="w-full p-4 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200">Sign
-            Up</button>
-    </form>
-</div>
+    <div id="flash-container" class="absolute top-0 right-0"></div>
+
+    <script>
+        // Mapping of categories to Tailwind CSS classes
+        const categoryStyles = {
+            'error': 'bg-red-500',
+            'info': 'bg-blue-500',
+            'success': 'bg-green-500',
+            'default': 'bg-gray-500'
+        };
+
+        // element dynamically using JavaScript if it doesn't exist in the HTML
+        function showFlashMessage(message, category) {
+            // Create or get the flash container
+            var flashContainer = document.getElementById("flash-container");
+            if (!flashContainer) {
+                flashContainer = document.createElement("div");
+                flashContainer.id = "flash-container";
+                flashContainer.classList.add("absolute", "top-0", "right-0");
+                document.body.appendChild(flashContainer);
+            }
+
+            // Now create a new flash message div element
+            var flashMessage = document.createElement("div");
+            flashMessage.classList.add(
+                "m-4",
+                "p-4",
+                "hover:bg-opacity-50",
+                "rounded-md",
+                categoryStyles[category],
+                "bg-green-500",
+                "bg-opacity-75",
+                "text-white",
+                "transition-all",
+                "duration-300",
+                "ease-in-out",
+                "text-white"
+            );
+
+            // Content of the flash message
+            flashMessage.innerHTML = `<span class="mr-2">${message}</span><button class="text-white font-bold font-mono text-lg" onclick="closeFlashMessage(this.parentElement)">X</button>`;
+
+            // Append the flash message to the container
+            flashContainer.appendChild(flashMessage);
+
+            // Using timeout to automatically remove the flash message after 5 seconds
+            setTimeout(function () {
+                closeFlashMessage(flashMessage);
+            }, 3000);
+
+            // Triggering a reflow to apply initial styles before applying animation
+            flashMessage.offsetHeight;
+
+            // Adding the animation class to initiate the fade-in effect
+            flashMessage.classList.add("opacity-100", "translate-x-0");
+        }
+
+        function closeFlashMessage(flashMessage) {
+            // Slide out the flash message
+            flashMessage.style.transition = 'transform 0.3s ease-in-out, opacity 0.3s ease-in-out';
+            //flashMessage.style.transform = 'translateX(110%)';
+            flashMessage.style.transform = 'translate-y-full';
+            flashMessage.style.opacity = '0';
+
+            // Remove the element from the DOM after the transition completes
+            flashMessage.addEventListener('transitionend', function () {
+                flashMessage.remove();
+            });
+        }
+
+        // Fetch and display Flask flash messages
+        document.addEventListener("DOMContentLoaded", function () {
+            // The .parse() will convert it to the object
+            var flashMessages = JSON.parse('{{ get_flashed_messages() | tojson | safe }}');
+
+            // Check if have any messages to show
+            if (flashMessages) {
+                flashMessages.forEach(function (message) {
+                    // at index 0: message and index 1: category
+                    showFlashMessage(message[0], message[1]);
+                });
+            }
+        });
+
+    </script>
 </body>
 {% endblock %}

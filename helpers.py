@@ -1,5 +1,5 @@
 # helpers.py
-from flask import session, redirect, flash, url_for
+from flask import session, redirect, flash, url_for, render_template
 from functools import wraps
 import secrets, re
 
@@ -14,7 +14,8 @@ def check_required_fields(fields):
     if missing_fields:
         for field in missing_fields:
             flash_message(f"{field.capitalize()} is required.", category='error')
-        return redirect(url_for('show_flash'))
+        # return redirect(url_for('show_flash'))
+        return render_template("signup.html")
     
     # Give us None in return if all good
     return None
