@@ -7,15 +7,14 @@ def flash_message(message, category='info'):
     # flash(message, category=category)
     flash((message, category), category=category)
 
-def check_required_fields(fields):
+def check_required_fields(fields, current_page):
     missing_fields = [field for field, value in fields.items() if not value]
     
     # If fields missing then show message
     if missing_fields:
         for field in missing_fields:
             flash_message(f"{field.capitalize()} is required.", category='error')
-        # return redirect(url_for('show_flash'))
-        return render_template("signup.html")
+        return render_template(f"{current_page}.html")
     
     # Give us None in return if all good
     return None

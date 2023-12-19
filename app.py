@@ -41,7 +41,7 @@ def signup():
         class_name = request.form.get("class")
         
         # Using the helper function to check requried fields
-        result = check_required_fields({"Full Name": full_name, "Email": email, "Password": password, "Class Name": class_name})
+        result = check_required_fields({"Full Name": full_name, "Email": email, "Password": password, "Class Name": class_name}, current_page="signup")
         
         # If True, return, otherwise, move forward
         if result:
@@ -170,7 +170,7 @@ def complaint():
             "Category": category,
             "Subject": subject,
             "Description": description
-        })
+        }, current_page="complaint_or_request")
         
         # If true, return, otherwise, move forward
         if result:
@@ -181,7 +181,7 @@ def complaint():
         
         # Show success message to the user
         flash_message("Your Complaint or request submitted successfully!", category="success")
-# No class students can be able to give exams in December it would be better to postpone the exams or should be taken online.
+
         # Redirect user to the index or any other appropriate page
         return redirect(url_for("index"))
     

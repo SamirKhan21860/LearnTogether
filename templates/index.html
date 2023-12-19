@@ -9,15 +9,19 @@ Results
 <body class="bg-[rgb(240,228,252)] relative">
 
     <!-- User info -->
-    <div class="bg-blue-500 hover:bg-blue-300 rounded-2xl font-sans p-4 m-4">
-        <h1 class="font-mono">Default Route: Index</h1>
-        <h2>Hello {{ student[0]["full_name"] }}</h2>
+    <div class="">
+        <div class="bg-blue-500 hover:bg-blue-300 rounded-2xl font-sans p-4 m-4">
+            <h1 class="font-mono">Default Route: Index</h1>
+            <h2>Hello {{ student[0]["full_name"] }}</h2>
+        </div>
     </div>
 
     <!-- Route to the Compalint / Request Page -->
-    <div class="bg-blue-300 hover:bg-blue-400 p-4 m-4 w-md h-md">
-        <h2>Complaint / Request</h2>
-        <p>If you have any request or want to complain, Feel free to provide us details</p>
+    <div class="complaint-request m-4 w-56">
+        <div class="bg-blue-300 hover:bg-blue-400 p-4 rounded-md">
+            <h2>Complaint / Request</h2>
+            <p>If you have any request or want to complain, Feel free to provide us details</p>
+        </div>
     </div>
 
     <!-- Flash messages -->
