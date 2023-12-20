@@ -27,13 +27,12 @@ Results
 
     <!-- Main Content Of the Page -->
     <main class="flex flex-col items-center justify-center h-full">
-
+    
         <!-- Table like bar for multiple pages -->
-        <div class="navigationBar flex space-x-0 text-white m-8">
+        <div class="navigationBar flex space-x-4 text-white m-8">
             <div class="navItem cursor-pointer" data-page="Announcements">
                 <div class="title p-2 bg-gray-600">Announcements</div>
-                <div class="description p-2 bg-purple-500">Improtant school updates and announcements
-                </div>
+                <div class="description p-2 bg-purple-500">Important school updates and announcements</div>
             </div>
             <div class="navItem cursor-pointer" data-page="ClassTiming">
                 <div class="title p-2 bg-gray-500">Class Timing</div>
@@ -41,47 +40,68 @@ Results
             </div>
             <div class="navItem cursor-pointer" data-page="Assignments">
                 <div class="title p-2 bg-gray-600">Assignments</div>
-                <div class="description p-2 bg-purple-500">Practical, details, guide, prerequisites, & resources.</div>
+                <div class="description p-2 bg-purple-500">Practical details, guide, prerequisites, & resources.</div>
             </div>
             <div class="navItem cursor-pointer" data-page="StudyMaterials">
                 <div class="title p-2 bg-gray-500">Study Materials</div>
-                <div class="description p-2 bg-purple-600">Self-Study, e-Learning, Visual & Practical & Listening
-                    processes</div>
+                <div class="description p-2 bg-purple-600">Self-Study, e-Learning, Visual & Practical & Listening processes
+                </div>
             </div>
             <div class="navItem cursor-pointer" data-page="ScholarshipOppertunities">
-                <div class="title p-2 bg-gray-700">Scholarship Oppertunities</div>
-                <div class="description p-2 bg-purple-700">Job Opportunities, internships, part-time job, openings &
-                    career fairs.</div>
+                <div class="title p-2 bg-gray-700">Scholarship Opportunities</div>
+                <div class="description p-2 bg-purple-700">Job Opportunities, internships, part-time job, openings & career
+                    fairs.</div>
             </div>
         </div>
-
+    
         <!-- multiple pages layout -->
-        <div class="switchPages flex overflow-hidden space-x-4">
-            <div
-                class="page m-4 p-4 flex-shrink-0 w-full h-screen p-8 bg-purple-300 rounded-md transform transition-transform duration-300 ease-in-out -translate-x-0">
+        <div class="switchPages flex overflow-hidden">
+            <div class="page m-4 p-4 flex-shrink-0 w-full h-screen bg-purple-300 rounded-md">
                 <div class="p-2 bg-white rounded-full w-40 text-center">
                     <h2 class="title">Announcements</h2>
                 </div>
             </div>
-            <div
-                class="page flex-shrink-0 w-full h-full p-8 bg-purple-400 rounded-md transform transition-transform duration-300 ease-in-out -translate-x-full">
+            <div class="page flex-shrink-0 w-full h-full p-8 bg-purple-400 rounded-md">
                 <h2>Class Timing Content</h2>
             </div>
-            <div
-                class="page flex-shrink-0 w-full h-full p-8 bg-purple-500 rounded-md transform transition-transform duration-300 ease-in-out -translate-x-full">
+            <div class="page flex-shrink-0 w-full h-full p-8 bg-purple-500 rounded-md">
                 <h2>Assignments Content</h2>
             </div>
-            <div
-                class="page flex-shrink-0 w-full h-full p-8 bg-purple-600 rounded-md transform transition-transform duration-300 ease-in-out -translate-x-full">
+            <div class="page flex-shrink-0 w-full h-full p-8 bg-purple-600 rounded-md">
                 <h2>Study Materials Content</h2>
             </div>
-            <div
-                class="page flex-shrink-0 w-full h-full p-8 bg-purple-700 rounded-md transform transition-transform duration-300 ease-in-out -translate-x-full">
+            <div class="page flex-shrink-0 w-full h-full p-8 bg-purple-700 rounded-md">
                 <h2>Scholarship Opportunities Content</h2>
             </div>
         </div>
-
+    
     </main>
+
+    <!-- Included the JavaScript Logic to handle page transitions -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const navItems = document.querySelectorAll('.navItem');
+            const pages = document.querySelectorAll('.page');
+
+            let currentPage = 0;
+
+            navItems.forEach((item, index) => {
+                item.addEventListener('click', function () {
+                    currentPage = index;
+                    showPage();
+                });
+            });
+
+            function showPage() {
+                pages.forEach((page, index) => {
+                    page.style.transform = `translateX(-${100 * (index - currentPage)}%)`;
+                });
+            }
+
+            // Smooth scrolling effect using CSS scroll-snap-type
+            document.body.style.scrollSnapType = 'x mandatory';
+        });
+    </script>
 
     <!-- Flash messages -->
     <!-- <div id="flash-container" class="absolute top-0 right-0">
