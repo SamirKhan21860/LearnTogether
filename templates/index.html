@@ -9,20 +9,27 @@ Results
 <body class="bg-[rgb(240,228,252)] relative">
 
     <!-- User info -->
-    <div class="">
-        <div class="bg-blue-500 hover:bg-blue-300 rounded-2xl font-sans p-4 m-4">
-            <h1 class="font-mono">Default Route: Index</h1>
-            <h2>Hello {{ student[0]["full_name"] }}</h2>
+    <div class="ml-4 mt-0 flex">
+        <div class="bg-gray-300 text-black rounded-2xl font-sans p-4">
+            <!-- <h1 class="font-mono">Default Route: Index</h1> -->
+            <h1>Welcome! {{ student[0]["full_name"] }}</h1>
         </div>
     </div>
 
     <!-- Route to the Compalint / Request Page -->
     <div class="complaint-request m-4 w-56">
-        <div class="bg-blue-300 hover:bg-blue-400 p-4 rounded-md">
-            <h2>Complaint / Request</h2>
-            <p>If you have any request or want to complain, Feel free to provide us details</p>
-        </div>
+        <a href="/complaint">
+            <div class="bg-blue-300 hover:bg-blue-400 p-4 rounded-md">
+                <h2>Complaint / Request</h2>
+                <p>If you have any request or want to complain, Feel free to provide us details</p>
+            </div>
+        </a>
     </div>
+
+    <!-- Main Content Of the Page -->
+    <main>
+        
+    </main>
 
     <!-- Flash messages -->
     <!-- <div id="flash-container" class="absolute top-0 right-0">

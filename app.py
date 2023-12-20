@@ -90,6 +90,9 @@ def login():
     # Clear session data
     session.clear()
     
+    if request.args.get('logout'):
+        flash_message("You're Logout!", category='success')
+    
     # If request method is POST then
     if request.method == "POST":
         email = request.form.get("email")
@@ -125,8 +128,7 @@ def login():
 @login_required
 def logout():
     session.clear()
-    # session["user_id"] = None
-    return redirect("/login")
+    return redirect(url_for('login', logout=True))
 
 
 @app.route("/classes")
