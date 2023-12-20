@@ -51,7 +51,7 @@ def signup():
         if not validate_class_name(class_name):
             flash_message("Class Name must adhere to the specified convention. i.e(CS50, CS or any acronym)", category='info')
             # return redirect(url_for('show_flash'))
-            return render_template("singup.html")
+            return render_template("signup.html")
         
         # Check if the email already exits
         email_exits = db.execute("SELECT * FROM students WHERE email = ?", email)
@@ -73,13 +73,9 @@ def signup():
         # Retrieve the newly inserted student's data
         student = db.execute("SELECT * FROM students WHERE email = ?", email)
         
-        
-        # Assign the user_id to the session
-        session["user_id"] = student[0]["id"]
-        
-        
         # Redirect user to login page
-        return redirect(url_for("login"))
+        # return redirect(url_for("login"))
+        return render_template("login.html")
     
     # if user request is get
     return render_template("signup.html")

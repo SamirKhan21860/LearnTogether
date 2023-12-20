@@ -9,26 +9,48 @@ Results
 <body class="bg-[rgb(240,228,252)] relative">
 
     <!-- User info -->
-    <div class="ml-4 mt-0 flex">
+    <!-- <div class="ml-4 mt-0 flex">
         <div class="bg-gray-300 text-black rounded-2xl font-sans p-4">
-            <!-- <h1 class="font-mono">Default Route: Index</h1> -->
             <h1>Welcome! {{ student[0]["full_name"] }}</h1>
         </div>
-    </div>
+    </div> -->
 
     <!-- Route to the Compalint / Request Page -->
-    <div class="complaint-request m-4 w-56">
+    <!-- <div class="complaint-request m-4 w-56">
         <a href="/complaint">
             <div class="bg-blue-300 hover:bg-blue-400 p-4 rounded-md">
                 <h2>Complaint / Request</h2>
                 <p>If you have any request or want to complain, Feel free to provide us details</p>
             </div>
         </a>
-    </div>
+    </div> -->
 
     <!-- Main Content Of the Page -->
-    <main>
-        
+    <main class="flex flex-col items-center justify-center h-full">
+        <!-- Table like bar for multiple pages -->
+        <div class="navigationBar flex space-x-4 p-4 bg-purple-500 text-white">
+            <div class="navItem cursor-pointer" data-page="Announcements">Announcements</div>
+            <div class="navItem cursor-pointer" data-page="ClassTiming">Class Timing</div>
+            <div class="navItem cursor-pointer" data-page="Assignments">Assignments</div>
+            <div class="navItem cursor-pointer" data-page="StudyMaterials">Study Materials</div>
+            <div class="navItem cursor-pointer" data-page="ScholarshipOppertunities">Scholarship Opportunities</div>
+        </div>
+
+        <!-- multiple pages layout -->
+        <div class="switchPages flex overflow-hidden space-x-4">
+            <div class="page flex-shrink-0 w-full h-full p-8 bg-purple-300 rounded-md transform transition-transform duration-300 ease-in-out"
+                id="Announcements">Announcements Content</div>
+            <div class="page flex-shrink-0 w-full h-full p-8 bg-purple-400 rounded-md transform transition-transform duration-300 ease-in-out"
+                id="ClassTiming">Class Timing Content</div>
+            <div class="page flex-shrink-0 w-full h-full p-8 bg-purple-500 rounded-md transform transition-transform duration-300 ease-in-out"
+                id="Assignments">Assignments Content</div>
+            <div class="page flex-shrink-0 w-full h-full p-8 bg-purple-600 rounded-md transform transition-transform duration-300 ease-in-out"
+                id="StudyMaterials">Study Materials Content</div>
+            <div class="page flex-shrink-0 w-full h-full p-8 bg-purple-700 rounded-md transform transition-transform duration-300 ease-in-out"
+                id="ScholarshipOppertunities">Scholarship Opportunities Content</div>
+        </div>
+        </div>
+
     </main>
 
     <!-- Flash messages -->
@@ -112,6 +134,26 @@ Results
                     // at index 0: message and index 1: category
                     showFlashMessage(message[0], message[1]);
                 });
+            }
+
+            // Multiple pages effect JS
+            const navItems = document.querySelectorAll('.navItem');
+            const pages = document.querySelectorAll('.page');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    const selectedPage = this.getAttribute('data-page');
+                    showPage(selectedPage);
+                });
+            });
+
+            function showPage(pageId) {
+                pages.forEach(page => {
+                    page.style.transform = 'translateX(-100%)';
+                });
+
+                const selectedPage = document.getElementById(pageId);
+                selectedPage.style.transform = 'translateX(0)';
             }
         });
 
