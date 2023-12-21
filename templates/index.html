@@ -6,7 +6,7 @@ Results
 
 {% block index %}
 
-<body class="bg-[rgb(240,228,252)] relative">
+<body class="bg-[rgb(240,228,252)] relative font-sans">
 
     <!-- User info -->
     <!-- <div class="ml-4 mt-0 flex">
@@ -25,83 +25,65 @@ Results
         </a>
     </div> -->
 
-    <!-- Main Content Of the Page -->
-    <main class="flex flex-col items-center justify-center h-full">
-    
-        <!-- Table like bar for multiple pages -->
-        <div class="navigationBar flex space-x-4 text-white m-8">
-            <div class="navItem cursor-pointer" data-page="Announcements">
-                <div class="title p-2 bg-gray-600">Announcements</div>
-                <div class="description p-2 bg-purple-500">Important school updates and announcements</div>
-            </div>
-            <div class="navItem cursor-pointer" data-page="ClassTiming">
-                <div class="title p-2 bg-gray-500">Class Timing</div>
-                <div class="description p-2 bg-purple-600">Organized templates of Class and books</div>
-            </div>
-            <div class="navItem cursor-pointer" data-page="Assignments">
-                <div class="title p-2 bg-gray-600">Assignments</div>
-                <div class="description p-2 bg-purple-500">Practical details, guide, prerequisites, & resources.</div>
-            </div>
-            <div class="navItem cursor-pointer" data-page="StudyMaterials">
-                <div class="title p-2 bg-gray-500">Study Materials</div>
-                <div class="description p-2 bg-purple-600">Self-Study, e-Learning, Visual & Practical & Listening processes
-                </div>
-            </div>
-            <div class="navItem cursor-pointer" data-page="ScholarshipOppertunities">
-                <div class="title p-2 bg-gray-700">Scholarship Opportunities</div>
-                <div class="description p-2 bg-purple-700">Job Opportunities, internships, part-time job, openings & career
-                    fairs.</div>
-            </div>
+    <!-- Table-like bar for multiple pages -->
+    <div class="navigationBar flex flex-col text-white m-4 sm:flex-row sm:space-x-4">
+        <div class="navItem cursor-pointer" onclick="showPage('announcements')">
+            <div class="title p-2 bg-gray-600">Announcements</div>
+            <div class="description p-2 bg-purple-500 sm:hidden">Important updates</div>
         </div>
-    
-        <!-- multiple pages layout -->
-        <div class="switchPages flex overflow-hidden">
-            <div class="page m-4 p-4 flex-shrink-0 w-full h-screen bg-purple-300 rounded-md">
-                <div class="p-2 bg-white rounded-full w-40 text-center">
-                    <h2 class="title">Announcements</h2>
-                </div>
-            </div>
-            <div class="page flex-shrink-0 w-full h-full p-8 bg-purple-400 rounded-md">
-                <h2>Class Timing Content</h2>
-            </div>
-            <div class="page flex-shrink-0 w-full h-full p-8 bg-purple-500 rounded-md">
-                <h2>Assignments Content</h2>
-            </div>
-            <div class="page flex-shrink-0 w-full h-full p-8 bg-purple-600 rounded-md">
-                <h2>Study Materials Content</h2>
-            </div>
-            <div class="page flex-shrink-0 w-full h-full p-8 bg-purple-700 rounded-md">
-                <h2>Scholarship Opportunities Content</h2>
-            </div>
+        <div class="navItem cursor-pointer" onclick="showPage('classTiming')">
+            <div class="title p-2 bg-gray-500">Class Timing</div>
+            <div class="description p-2 bg-purple-600 sm:hidden">Organized templates</div>
         </div>
-    
+        <div class="navItem cursor-pointer" onclick="showPage('assignments')">
+            <div class="title p-2 bg-gray-600">Assignments</div>
+            <div class="description p-2 bg-purple-500 sm:hidden">Practical details</div>
+        </div>
+        <div class="navItem cursor-pointer" onclick="showPage('studyMaterials')">
+            <div class="title p-2 bg-gray-500">Study Materials</div>
+            <div class="description p-2 bg-purple-600 sm:hidden">Self-Study, e-Learning</div>
+        </div>
+        <div class="navItem cursor-pointer" onclick="showPage('scholarshipOpportunities')">
+            <div class="title p-2 bg-gray-700">Scholarship Opportunities</div>
+            <div class="description p-2 bg-purple-700 sm:hidden">Job Opportunities</div>
+        </div>
+    </div>
+
+    <!-- Multiple pages layout -->
+    <div id="switchPages" class="switchPages flex overflow-x-auto w-full">
+
+        <div id="page-announcements" class="page m-4 p-4 flex-shrink-0 w-full min-h-64 bg-purple-300 rounded-md">
+            <div class="p-2 bg-white rounded-full w-40 text-center">
+                <h2 class="title">Announcements</h2>
+            </div>
+            <!-- Add your form and data display for Announcements here -->
+        </div>
+
+        <div id="page-classTiming" class="page flex-shrink-0 w-full h-full p-8 bg-purple-400 rounded-md">
+            <h2>Class Timing Content</h2>
+            <!-- Add your form and data display for Class Timing here -->
+        </div>
+
+        <div id="page-assignments" class="page flex-shrink-0 w-full h-full p-8 bg-purple-500 rounded-md">
+            <h2>Assignments Content</h2>
+            <!-- Add your form and data display for Assignments here -->
+        </div>
+
+        <div id="page-studyMaterials" class="page flex-shrink-0 w-full h-full p-8 bg-purple-600 rounded-md">
+            <h2>Study Materials Content</h2>
+            <!-- Add your form and data display for Study Materials here -->
+        </div>
+
+        <div id="page-scholarshipOpportunities" class="page flex-shrink-0 w-full h-full p-8 bg-purple-700 rounded-md">
+            <h2>Scholarship Opportunities Content</h2>
+            <!-- Add your form and data display for Scholarship Opportunities here -->
+        </div>
+
+    </div>
+
     </main>
 
-    <!-- Included the JavaScript Logic to handle page transitions -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const navItems = document.querySelectorAll('.navItem');
-            const pages = document.querySelectorAll('.page');
 
-            let currentPage = 0;
-
-            navItems.forEach((item, index) => {
-                item.addEventListener('click', function () {
-                    currentPage = index;
-                    showPage();
-                });
-            });
-
-            function showPage() {
-                pages.forEach((page, index) => {
-                    page.style.transform = `translateX(-${100 * (index - currentPage)}%)`;
-                });
-            }
-
-            // Smooth scrolling effect using CSS scroll-snap-type
-            document.body.style.scrollSnapType = 'x mandatory';
-        });
-    </script>
 
     <!-- Flash messages -->
     <!-- <div id="flash-container" class="absolute top-0 right-0">
@@ -109,6 +91,17 @@ Results
 
     <!-- Included the JavaScript Logic to handle flash messages dynamically -->
     <script>
+        function showPage(pageId) {
+            const switchPages = document.getElementById('switchPages');
+            const selectedPage = document.getElementById(`page-${pageId}`);
+
+            // Calculate the left offset to slide the selected page into view
+            const leftOffset = selectedPage.offsetLeft;
+
+            // Slide to the selected page
+            switchPages.scrollTo({ left: leftOffset, behavior: 'smooth' });
+        }
+
         // Mapping of categories to Tailwind CSS classes
         const categoryStyles = {
             'error': 'bg-red-500',
@@ -184,26 +177,6 @@ Results
                     // at index 0: message and index 1: category
                     showFlashMessage(message[0], message[1]);
                 });
-            }
-
-            // Multiple pages effect JS
-            const navItems = document.querySelectorAll('.navItem');
-            const pages = document.querySelectorAll('.page');
-
-            navItems.forEach(item => {
-                item.addEventListener('click', function () {
-                    const selectedPage = this.getAttribute('data-page');
-                    showPage(selectedPage);
-                });
-            });
-
-            function showPage(pageId) {
-                pages.forEach(page => {
-                    page.classList.remove('translate-x-full', '-translate-x-full', 'translate-x-0');
-                });
-
-                const selectedPage = document.getElementById(pageId);
-                selectedPage.classList.add('translate-x-0');
             }
         });
 

@@ -23,13 +23,13 @@ CREATE TABLE complaints_requests (
     FOREIGN KEY (student_id) REFERENCES students (id)
 );
 -- -- Announcements
--- CREATE TABLE announcements (
---     id INTEGER PRIMARY KEY AUTOINCREMENT,
---     title TEXT NOT NULL,
---     content TEXT NOT NULL,
---     posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
---     author TEXT
--- );
+CREATE TABLE announcements (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL,
+    posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    author TEXT
+);
 
 -- -- Upcoming Events
 -- CREATE TABLE upcoming_events (
