@@ -26,60 +26,69 @@ Results
     </div> -->
 
     <!-- Table-like bar for multiple pages -->
-    <div class="navigationBar flex flex-col text-white m-4 sm:flex-row sm:space-x-4">
-        <div class="navItem cursor-pointer" onclick="showPage('announcements')">
-            <div class="title p-2 bg-gray-600">Announcements</div>
-            <div class="description p-2 bg-purple-500 sm:hidden">Important updates</div>
-        </div>
-        <div class="navItem cursor-pointer" onclick="showPage('classTiming')">
-            <div class="title p-2 bg-gray-500">Class Timing</div>
-            <div class="description p-2 bg-purple-600 sm:hidden">Organized templates</div>
-        </div>
-        <div class="navItem cursor-pointer" onclick="showPage('assignments')">
-            <div class="title p-2 bg-gray-600">Assignments</div>
-            <div class="description p-2 bg-purple-500 sm:hidden">Practical details</div>
-        </div>
-        <div class="navItem cursor-pointer" onclick="showPage('studyMaterials')">
-            <div class="title p-2 bg-gray-500">Study Materials</div>
-            <div class="description p-2 bg-purple-600 sm:hidden">Self-Study, e-Learning</div>
-        </div>
-        <div class="navItem cursor-pointer" onclick="showPage('scholarshipOpportunities')">
-            <div class="title p-2 bg-gray-700">Scholarship Opportunities</div>
-            <div class="description p-2 bg-purple-700 sm:hidden">Job Opportunities</div>
-        </div>
-    </div>
-
-    <!-- Multiple pages layout -->
-    <div id="switchPages" class="switchPages flex overflow-x-auto w-full">
-
-        <div id="page-announcements" class="page m-4 p-4 flex-shrink-0 w-full min-h-64 bg-purple-300 rounded-md">
-            <div class="p-2 bg-white rounded-full w-40 text-center">
-                <h2 class="title">Announcements</h2>
+    <main class="flex flex-col items-center justify-center h-full">
+        <div class="navigationBar flex flex-col text-white m-4 md:flex-row">
+            <div class="navItem cursor-pointer" onclick="showPage('announcements')">
+                <div class="title p-2 bg-gray-600">Announcements</div>
+                <div class="description p-2 bg-purple-500 md:block hidden">Important updates</div>
             </div>
-            <!-- Add your form and data display for Announcements here -->
+            <div class="navItem cursor-pointer" onclick="showPage('classTiming')">
+                <div class="title p-2 bg-gray-500">Class Timing</div>
+                <div class="description p-2 bg-purple-600 md:block hidden">Organized templates</div>
+            </div>
+            <div class="navItem cursor-pointer" onclick="showPage('assignments')">
+                <div class="title p-2 bg-gray-600">Assignments</div>
+                <div class="description p-2 bg-purple-500 md:block hidden">Practical details</div>
+            </div>
+            <div class="navItem cursor-pointer" onclick="showPage('studyMaterials')">
+                <div class="title p-2 bg-gray-500">Study Materials</div>
+                <div class="description p-2 bg-purple-600 md:block hidden">Self-Study, e-Learning</div>
+            </div>
+            <div class="navItem cursor-pointer" onclick="showPage('scholarshipOpportunities')">
+                <div class="title p-2 bg-gray-700">Scholarship Opportunities</div>
+                <div class="description p-2 bg-purple-700 md:block hidden">Job Opportunities</div>
+            </div>
         </div>
 
-        <div id="page-classTiming" class="page flex-shrink-0 w-full h-full p-8 bg-purple-400 rounded-md">
-            <h2>Class Timing Content</h2>
-            <!-- Add your form and data display for Class Timing here -->
-        </div>
+        <!-- Multiple pages layout -->
+        <div id="switchPages" class="switchPages flex overflow-x-auto w-full">
 
-        <div id="page-assignments" class="page flex-shrink-0 w-full h-full p-8 bg-purple-500 rounded-md">
-            <h2>Assignments Content</h2>
-            <!-- Add your form and data display for Assignments here -->
-        </div>
+            <div id="page-announcements" class="page m-4 p-4 w-full min-h-64 bg-purple-300 rounded-md">
+                <div class="p-2 bg-white rounded-full w-40 text-center">
+                    <h2 class="title">Announcements</h2>
+                </div>
+                <!-- Add your form and data display for Announcements here -->
+            </div>
 
-        <div id="page-studyMaterials" class="page flex-shrink-0 w-full h-full p-8 bg-purple-600 rounded-md">
-            <h2>Study Materials Content</h2>
-            <!-- Add your form and data display for Study Materials here -->
-        </div>
+            <div id="page-classTiming" class="page w-full min-h-64 p-8 bg-purple-400 rounded-md">
+                <div class="p-2 bg-white rounded-full w-40 text-center">
+                    <h2>Class Timing Content</h2>
+                </div>
+                <!-- Add your form and data display for Class Timing here -->
+            </div>
 
-        <div id="page-scholarshipOpportunities" class="page flex-shrink-0 w-full h-full p-8 bg-purple-700 rounded-md">
-            <h2>Scholarship Opportunities Content</h2>
-            <!-- Add your form and data display for Scholarship Opportunities here -->
-        </div>
+            <div id="page-assignments" class="page w-full min-h-64 p-8 bg-purple-500 rounded-md">
+                <div class="p-2 bg-white rounded-full w-40 text-center">
+                    <h2>Assignments Content</h2>
+                </div>
+                <!-- Add your form and data display for Assignments here -->
+            </div>
 
-    </div>
+            <div id="page-studyMaterials" class="page w-full min-h-64 p-8 bg-purple-600 rounded-md">
+                <div class="p-2 bg-white rounded-full w-40 text-center">
+                    <h2>Study Materials Content</h2>
+                </div>
+                <!-- Add your form and data display for Study Materials here -->
+            </div>
+
+            <div id="page-scholarshipOpportunities" class="page w-full min-h-64 p-8 bg-purple-700 rounded-md">
+                <div class="p-2 bg-white rounded-full w-40 text-center">
+                    <h2>Scholarship Opportunities Content</h2>
+                </div>
+                <!-- Add your form and data display for Scholarship Opportunities here -->
+            </div>
+
+        </div>
 
     </main>
 
