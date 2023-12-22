@@ -36,3 +36,8 @@
     color: white;
     /* Tailwind CSS gray-darker color on hover */
 }
+
+.page {
+    width: 60%;
+    height: 71lvh;
+}

@@ -26,3 +26,21 @@ Challenge Faced:
     the incomplete complaint form. There is an unexpected interference with the 
     flash messages related to the login success message, which should not be 
     displayed in this context.
+
+    <!-- User info -->
+    <!-- <div class= "ml-4 mt-0 flex" >
+            < div class= "bg-gray-300 text-black rounded-2xl font-sans p-4" >
+                < h1 > Welcome! { { student[0]["full_name"] } }</ h1 >
+            </ div >
+        </ div > -->
+
+
+    < !--Route to the Compalint / Request Page -->
+    <!-- <div class= "complaint-request m-4 w-56" >
+            < a href = "/complaint" >
+                < div class= "bg-blue-300 hover:bg-blue-400 p-4 rounded-md" >
+                    < h2 > Complaint / Request </ h2 >
+                    < p > If you have any request or want to complain, Feel free to provide us details</p>
+                </div>
+            </a>
+        </div> -->

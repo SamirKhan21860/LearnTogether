@@ -41,14 +41,15 @@ CREATE TABLE announcements (
 -- );
 
 -- -- Assignment Reminders
--- CREATE TABLE assignment_reminders (
---     id INTEGER PRIMARY KEY AUTOINCREMENT,
---     user_id INTEGER,
---     assignment_name TEXT NOT NULL,
---     due_date DATE NOT NULL,
---     reminder_time DATETIME,
---     FOREIGN KEY (user_id) REFERENCES students(id)
--- );
+CREATE TABLE assignment_reminders (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    name TEXT NOT NULL,
+    subject TEXT NOT NULL,
+    description TEXT NOT NULL,
+    posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES students(id)
+);
 
 -- -- Exam Schedules
 -- CREATE TABLE exam_schedules (
