@@ -61,13 +61,13 @@ Results
                         <input type="text" id="assignment_name" name="assignment_name" placeholder="Name"
                             class="shadow appearance-none border rounded-full text-center items-center w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
-                    <div class="mb-4">
-                        <textarea id="assignment_description" name="assignment_description" placeholder="Take a key Note"
-                            class="shadow appearance-none border rounded-lg text-center items-center w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"></textarea>
-                    </div>
                     <div class="mb-6">
                         <input id="subject" name="subject" placeholder="Subject?"
                             class="shadow appearance-none border rounded-full text-center items-center w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                    <div class="mb-4">
+                        <textarea id="assignment_description" name="assignment_description" placeholder="Take a key Note"
+                            class="shadow appearance-none border rounded-lg text-center items-center w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"></textarea>
                     </div>
                     <div class="flex items-center justify-between">
                         <button type="submit"
@@ -82,15 +82,17 @@ Results
                     <table class="min-w-full table-auto">
                         <thead>
                             <tr>
-                                <th class="border px-4 py-2">Assignment Name</th>
-                                <th class="border px-4 py-2">Assignment Description</th>
+                                <th class="border px-4 py-2">Name</th>
+                                <th class="border px-4 py-2">Subject</th>
+                                <th class="border px-4 py-2">Description</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for assignment in assignments %}
+                            {% for assign in assignment %}
                             <tr>
-                                <td class="border px-4 py-2">{{ assignment.name }}</td>
-                                <td class="border px-4 py-2">{{ assignment.description }}</td>
+                                <td class="border px-4 py-2">{{ assign.name }}</td>
+                                <td class="border px-4 py-2">{{ assign.subject }}</td>
+                                <td class="border px-4 py-2">{{ assign.description }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>

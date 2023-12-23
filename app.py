@@ -19,14 +19,14 @@ app.config["STATIC_FOLDER"] = "static"
 
 # SQL Database for sudents
 db = SQL("sqlite:///learntogether.db")
-assignments = []  # Store assignments in-memory, you might want to use a database in a real application
 
 # Routes
 @app.route("/")
 @login_required
 def index():
     # name = db.execute("SELECT full_name FROM students WHERE id = ?", session["user_id"])
-    return render_template("index.html", assignments=assignments)
+    assignment = db.execute("SELECT * FROM assignment WHERE id = ?", session["user_id"])
+    return render_template("index.html", assignment=assignment)
     
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -138,10 +138,12 @@ def classes():
 @login_required
 def assign():
     if request.method == 'POST':
-        assignment_name = request.form.get('assignment_name')
-        assignment_description = request.form.get('assignment_description')
-        if assignment_name and assignment_description:
-            assignments.append({'name': assignment_name, 'description': assignment_description})
+        name = request.form.get('assignment_name')
+        subject = request.form.get('subject')
+        description = request.form.get('assignment_description')
+        
+        if name and description:
+            db.execute("INSERT INTO assignment (name, subject, description) VALUES (?, ?, ?)", name, subject, description)
     
     return redirect("/")
 

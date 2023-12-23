@@ -41,7 +41,7 @@ CREATE TABLE announcements (
 -- );
 
 -- -- Assignment Reminders
-CREATE TABLE assignment_reminders (
+CREATE TABLE assignment (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER,
     name TEXT NOT NULL,
