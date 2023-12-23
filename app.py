@@ -25,7 +25,7 @@ db = SQL("sqlite:///learntogether.db")
 @login_required
 def index():
     # name = db.execute("SELECT full_name FROM students WHERE id = ?", session["user_id"])
-    assignment = db.execute("SELECT * FROM assignment WHERE id = ?", session["user_id"])
+    assignment = db.execute("SELECT * FROM assignment WHERE student_id = ?", session["user_id"])
     return render_template("index.html", assignment=assignment)
     
 
@@ -72,7 +72,7 @@ def signup():
         # return render_template("singup.html")
         
         # Retrieve the newly inserted student's data
-        student = db.execute("SELECT * FROM students WHERE email = ?", email)
+        # student = db.execute("SELECT * FROM students WHERE email = ?", email)
         
         # Redirect user to login page
         # return redirect(url_for("login"))
@@ -142,8 +142,8 @@ def assign():
         subject = request.form.get('subject')
         description = request.form.get('assignment_description')
         
-        if name and description:
-            db.execute("INSERT INTO assignment (name, subject, description) VALUES (?, ?, ?)", name, subject, description)
+        if name and subject and description:
+            db.execute("INSERT INTO assignment (student_id, name, subject, description) VALUES (?, ?, ?, ?)", session["user_id"], name, subject, description)
     
     return redirect("/")
 

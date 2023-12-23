@@ -43,12 +43,12 @@ CREATE TABLE announcements (
 -- -- Assignment Reminders
 CREATE TABLE assignment (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER,
+    student_id INTEGER NOT NULL,
     name TEXT NOT NULL,
     subject TEXT NOT NULL,
     description TEXT NOT NULL,
     posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES students(id)
+    FOREIGN KEY (student_id) REFERENCES students (id)
 );
 
 -- -- Exam Schedules
