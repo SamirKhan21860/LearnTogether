@@ -105,7 +105,7 @@ Results
 
             </div>
 
-            <div id="page-studyMaterials" class="page pl-6 m-4 bg-purple-600 rounded-md flex flex-col items-center justify-center">
+            <div id="page-studyMaterials" class="page pl-6 m-4 bg-purple-600 rounded-md flex flex-col items-center justify-center hidden">
                 <div class="p-4 bg-white rounded-full text-center">
                     <h2>Study Materials</h2>
                 </div>
@@ -120,10 +120,19 @@ Results
             </div>
 
             <div id="page-scholarshipOpportunities"
-                class="page p-4 m-4 bg-purple-700 rounded-md flex flex-col items-center justify-center hidden">
+                class="page p-4 m-4 bg-purple-700 rounded-md flex flex-col items-center justify-center">
                 <div class="p-4 bg-white rounded-full w-auto text-center">
-                    <h2>Scholarship Opportunities</h2>
+                    <h2>Opportunities</h2>
                 </div>
+                <div class="ml-4 mt-32 mb-64">
+                    <form action="/search">
+                    <input type="search" name="job" id="job" autofocus autocomplete="off" placeholder="Search for job"
+                        class="p-4 m-4 rounded-3xl focus:rounded-full bg-rose-200 placeholder:text-indigo-800 focus:outline-none focus:ring focus:ring-lime-200">
+                    <button type="submit"
+                        class="bg-blue-500 text-white p-4 rounded-xl hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200 transition duration-300">Search</button>
+                </form>
+                </div>
+                
             </div>
 
         </div>

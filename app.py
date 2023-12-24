@@ -195,8 +195,8 @@ def complaint():
     return render_template("complaint_or_request.html")
 
 
-@app.route("/show_flash")
-def show_flash():
+@app.route("/search")
+def search():
     return render_template('show_flash.html')
 
 
