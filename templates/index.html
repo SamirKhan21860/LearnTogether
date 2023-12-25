@@ -154,11 +154,11 @@ Results
                 </div>
             </div> -->
             <div id="page-scholarshipOpportunities"
-                class="page p-4 m-4 bg-purple-700 rounded-md flex flex-col items-center justify-center">
+                class="page p-4 m-4 bg-purple-700 rounded-md flex flex-col items-center justify-start">
                 <div class="p-4 bg-white rounded-full w-auto text-center">
                     <h2>Opportunities</h2>
                 </div>
-                <div class="ml-4 mt-32 mb-64">
+                <div class="serach ml-16 mt-2" id="search">
                     <form id="jobSearchForm">
                         <input type="search" name="job" id="job" autofocus autocomplete="off"
                             placeholder="Search for a job"
@@ -166,6 +166,11 @@ Results
                         <button type="submit"
                             class="bg-blue-500 text-white p-4 rounded-xl hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200 transition duration-300">Search</button>
                     </form>
+                </div>
+                
+                <!-- Job-Cards -->
+                <div class="jobContainer" id="jobGridContainer">
+
                 </div>
             </div>
 
@@ -296,6 +301,7 @@ Results
             // displayJobs();
             const jobSearchForm = document.getElementById('jobSearchForm');
             const opportunitiesContainer = document.getElementById('page-scholarshipOpportunities');
+            const jobGridContainer = document.getElementById('jobGridContainer');
 
             jobSearchForm.addEventListener('submit', function (event) {
                 event.preventDefault();
@@ -321,10 +327,11 @@ Results
                     .then(response => response.json())
                     .then(data => {
                         // Clear previous job cards
-                        opportunitiesContainer.innerHTML = '';
+                        jobGridContainer.innerHTML = '';
 
-                        const jobGridContainer = document.createElement('div');
-                        jobGridContainer.classList.add('rounded-md', 'mt-64', 'overflow-auto', 'grid', 'grid-cols-1', 'md:grid-cols-2', 'lg:grid-cols-3', 'gap-4');
+                        
+                        // const jobGridContainer = document.createElement('div');
+                        jobGridContainer.classList.add('rounded-md', 'overflow-auto', 'grid', 'grid-cols-1', 'md:grid-cols-2', 'lg:grid-cols-3', 'gap-4');
 
                         // Display new job cards
                         data.data.forEach(job => {
@@ -334,7 +341,7 @@ Results
                             const shortDescription = truncateDescription(job.job_description, 150);
 
                             jobCard.innerHTML = `
-                            <img src="${job.employer_logo}" alt="${job.employer_name}" class="mb-2" style="max-width: 100px;">
+                            <img src="${job.employer_logo}" alt="${job.employer_name}" class="mb-2" style="max-width: 50px;">
                             <h3 class="text-xl font-semibold">${job.job_title}</h3>
                             <p class="text-gray-600">${job.employer_name} - ${job.job_city}, ${job.job_state}</p>
                             <p class="mt-2">${shortDescription}</p>
@@ -345,7 +352,7 @@ Results
                             // opportunitiesContainer.appendChild(jobCard);
                             console.log("Fetch data successfully")
                         });
-                        opportunitiesContainer.appendChild(jobGridContainer);
+                        // opportunitiesContainer.appendChild(jobGridContainer);
                     })
                     .catch(error => {
                         console.error('Error fetching jobs:', error);
