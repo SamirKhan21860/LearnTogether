@@ -1,6 +1,6 @@
 import os
 
-import secrets
+import  requests
 from flask import Flask, request, redirect, url_for, render_template, session
 from flask_session import Session
 from cs50 import SQL
@@ -21,9 +21,36 @@ app.config["STATIC_FOLDER"] = "static"
 db = SQL("sqlite:///learntogether.db")
 
 # Routes
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 @login_required
 def index():
+    # if request.method == "POST":
+    #     try:
+    #         job_query = request.form['job']
+
+    #         # Perform the API request with the job query
+    #         api_url = "https://jsearch.p.rapidapi.com/search"
+    #         api_headers = {
+    #             'X-RapidAPI-Key': '648d1a0acamsheeb1c88c3ed9679p1b37ecjsn2133e3d076b0',
+    #             'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
+    #         }
+    #         api_params = {
+    #             'query': job_query,
+    #             'page': '1',
+    #             'num_pages': '1'
+    #         }
+
+    #         response = requests.get(api_url, headers=api_headers, params=api_params)
+    #         jobs_data = response
+            
+    #         flash_message("Jobs are founded", category="success")
+    #         return render_template("index.html", jobs_data=jobs_data)
+            
+    #     except Exception as e:
+    #         e = f"Error: {e}"
+    #         flash_message(e, category="error")
+    #         return render_template("index.html")
+    
     # name = db.execute("SELECT full_name FROM students WHERE id = ?", session["user_id"])
     assignment = db.execute("SELECT * FROM assignment WHERE student_id = ?", session["user_id"])
     return render_template("index.html", assignment=assignment)
@@ -97,7 +124,7 @@ def login():
         
         # Check the user input 
         if not email or not password:
-            flash_message("Provide required Fields to Log In!", category='info')
+            flash_message("Provide required Fields to Log In!", category='error')
             # return redirect(url_for('show_flash'))
             return render_template("login.html")
         

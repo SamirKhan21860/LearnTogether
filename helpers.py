@@ -3,7 +3,7 @@ from flask import session, redirect, flash, url_for, render_template
 from functools import wraps
 import secrets, re
 
-def flash_message(message, category='info'):
+def flash_message(message, category='default'):
     # flash(message, category=category)
     flash((message, category), category=category)
 
@@ -33,7 +33,7 @@ def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if session.get("user_id") is None:
-            return redirect("/signup")
+            return redirect(url_for("login"))
         return f(*args, **kwargs)
     return decorated_function
 
