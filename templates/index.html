@@ -39,106 +39,110 @@ Results
         <div id="switchPages" class="switchPages flex justify-center flex-wrap">
 
             <div id="page-announcements"
-                class="page p-4 m-4 bg-purple-300 rounded-md flex flex-col items-center justify-center hidden">
+                class="page p-4 m-4 bg-purple-300 rounded-md flex items-start justify-center hidden">
                 <div class="p-4 bg-white rounded-full text-center">
                     <h2 class="title">Announcements</h2>
                 </div>
             </div>
 
             <div id="page-classTiming"
-                class="page p-4 m-4 bg-purple-400 rounded-md flex flex-col items-center justify-center hidden">
+                class="page p-4 m-4 bg-purple-400 rounded-md flex items-start justify-center hidden">
                 <div class="p-4 bg-white rounded-full text-center">
                     <h2>Class Timing</h2>
                 </div>
             </div>
 
             <div id="page-assignments"
-                class="page p-4 m-4 bg-purple-500 rounded-md flex flex-col items-center justify-center hidden">
-                <div class="p-4 bg-white rounded-full text-center">
+                class="page p-4 m-4 bg-amber-300 rounded-md overflow-y-auto flex flex-col items-center justify-center hidden">
+                <div class="p-4 mt-10 bg-white rounded-full text-center">
                     <h2>Assignments</h2>
                 </div>
 
                 <!-- Assignment Form -->
                 <form action="/assign" method="post">
-                    <div class="mb-4">
-                        <input type="text" id="assignment_name" name="assignment_name" placeholder="Name"
-                            class="shadow appearance-none border rounded-full text-center items-center w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline">
-                    </div>
-                    <div class="mb-6">
-                        <input id="subject" name="subject" placeholder="Subject?"
-                            class="shadow appearance-none border rounded-full text-center items-center w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline">
-                    </div>
-                    <div class="mb-4">
-                        <textarea id="assignment_description" name="assignment_description"
-                            placeholder="Take a key Note"
-                            class="shadow appearance-none border rounded-lg text-center items-center w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"></textarea>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <button type="submit"
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add
-                            Assignment</button>
-                    </div>
+                    <div class="grid grid-cols-2 gap-4 mt-4" id="inputAssignment">
+                        <div class="mb-4">
+                            <input type="text" id="assignment_name" name="assignment_name" placeholder="Name"
+                                class="shadow appearance-none border rounded-full text-center items-center py-2 px-3 leading-tight focus:outline-none focus:shadow-outline">
+                        </div>
+                        <div class="mb-6">
+                            <input id="subject" name="subject" placeholder="Subject?"
+                                class="shadow appearance-none border rounded-full text-center items-center py-2 px-3 leading-tight focus:outline-none focus:shadow-outline">
+                        </div>
+                        <div class="mb-4">
+                            <textarea id="assignment_description" name="assignment_description"
+                                placeholder="Take a key Note"
+                                class="shadow appearance-none border rounded-lg text-center items-center w-md py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                        </div>
+                        <div class="flex items-center justify-start">
+                            <button type="submit"
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add
+                                Assignment</button>
+                        </div>
                 </form>
-
-                <!-- Display Added Assignments -->
-                <div class="mt-8">
-                    <h3 class="text-xl font-bold mb-4">Added Assignments:</h3>
-                    <table class="min-w-full table-auto">
-                        <thead>
-                            <tr>
-                                <th class="border px-4 py-2">Name</th>
-                                <th class="border px-4 py-2">Subject</th>
-                                <th class="border px-4 py-2">Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for assign in assignment %}
-                            <tr>
-                                <td class="border px-4 py-2">{{ assign.name }}</td>
-                                <td class="border px-4 py-2">{{ assign.subject }}</td>
-                                <td class="border px-4 py-2">{{ assign.description }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-
             </div>
 
-            <div id="page-studyMaterials"
-                class="page pl-6 m-4 bg-purple-600 rounded-md flex flex-col items-center justify-center hidden">
-                <div class="p-4 bg-white rounded-full text-center">
-                    <h2>Study Materials</h2>
-                </div>
-                <div class="container grid grid-cols-3 gap-4 mx-auto text-white ml-4 mt-8 mb-8">
-                    <div
-                        class="content p-4 hover:p-6 rounded-lg bg-purple-400 w-40 hover:w-48 hover:h-48 shadow shadow-2xl opacity-75 hover:opacity-100 h-40 transition-all duration-300">
-                        <h3>Heading 1</h3>
-                    </div>
-                    <div
-                        class="content p-4 hover:p-6 rounded-lg bg-purple-500 w-40 hover:w-48 hover:h-48 shadow shadow-2xl opacity-75 hover:opacity-100 h-40 transition-all duration-300">
-                        <h3>Heading 2</h3>
-                    </div>
-                    <div
-                        class="content p-4 hover:p-6 rounded-lg bg-purple-300 w-40 hover:w-48 hover:h-48 shadow shadow-2xl opacity-75 hover:opacity-100 h-40 transition-all duration-300">
-                        <h3>Heading 3</h3>
-                    </div>
-                    <div
-                        class="content p-4 hover:p-6 rounded-lg bg-purple-300 w-40 hover:w-48 hover:h-48 shadow shadow-2xl opacity-75 hover:opacity-100 h-40 transition-all duration-300">
-                        <h3>Heading 4</h3>
-                    </div>
-                    <div
-                        class="content p-4 hover:p-6 rounded-lg bg-purple-500 w-40 hover:w-48 hover:h-48 shadow shadow-2xl opacity-75 hover:opacity-100 h-40 transition-all duration-300">
-                        <h3>Heading 5</h3>
-                    </div>
-                    <div
-                        class="content p-4 hover:p-6 rounded-lg bg-purple-400 w-40 hover:w-48 hover:h-48 shadow shadow-2xl opacity-75 hover:opacity-100 h-40 transition-all duration-300">
-                        <h3>Heading 6</h3>
-                    </div>
-                </div>
+
+            <!-- Display Added Assignments -->
+            <div class="mt-8">
+                <h3 class="text-xl font-bold mb-4">Added Assignments:</h3>
+                <table class="min-w-full table-auto bg-amber-100">
+                    <thead>
+                        <tr>
+                            <th class="border px-4 py-2">Name</th>
+                            <th class="border px-4 py-2">Subject</th>
+                            <th class="border px-4 py-2">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for assign in assignment %}
+                        <tr>
+                            <td class="border px-4 py-2">{{ assign.name }}</td>
+                            <td class="border px-4 py-2">{{ assign.subject }}</td>
+                            <td class="border px-4 py-2">{{ assign.description }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
 
-            <!-- <div id="page-scholarshipOpportunities"
+        </div>
+
+        <div id="page-studyMaterials"
+            class="page pl-6 m-4 bg-purple-600 rounded-md flex flex-col items-center justify-center">
+            <div class="p-4 bg-white rounded-full text-center">
+                <h2>Study Materials</h2>
+            </div>
+            <button id="fetchNumbersButton">Fetch New Data</button>
+            <div id="study-cards" class="container grid grid-cols-3 gap-4 mx-auto text-white ml-4 mt-8 mb-8">
+                <div
+                    class="content p-4 hover:p-6 rounded-lg bg-purple-400 w-40 hover:w-48 hover:h-48 shadow shadow-2xl opacity-75 hover:opacity-100 h-40 transition-all duration-300">
+                    <h3>Heading 1</h3>
+                </div>
+                <div
+                    class="content p-4 hover:p-6 rounded-lg bg-purple-500 w-40 hover:w-48 hover:h-48 shadow shadow-2xl opacity-75 hover:opacity-100 h-40 transition-all duration-300">
+                    <h3>Heading 2</h3>
+                </div>
+                <div
+                    class="content p-4 hover:p-6 rounded-lg bg-purple-300 w-40 hover:w-48 hover:h-48 shadow shadow-2xl opacity-75 hover:opacity-100 h-40 transition-all duration-300">
+                    <h3>Heading 3</h3>
+                </div>
+                <div
+                    class="content p-4 hover:p-6 rounded-lg bg-purple-300 w-40 hover:w-48 hover:h-48 shadow shadow-2xl opacity-75 hover:opacity-100 h-40 transition-all duration-300">
+                    <h3>Heading 4</h3>
+                </div>
+                <div
+                    class="content p-4 hover:p-6 rounded-lg bg-purple-500 w-40 hover:w-48 hover:h-48 shadow shadow-2xl opacity-75 hover:opacity-100 h-40 transition-all duration-300">
+                    <h3>Heading 5</h3>
+                </div>
+                <div
+                    class="content p-4 hover:p-6 rounded-lg bg-purple-400 w-40 hover:w-48 hover:h-48 shadow shadow-2xl opacity-75 hover:opacity-100 h-40 transition-all duration-300">
+                    <h3>Heading 6</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div id="page-scholarshipOpportunities"
                 class="page p-4 m-4 bg-purple-700 rounded-md flex flex-col items-center justify-center">
                 <div class="p-4 bg-white rounded-full w-auto text-center">
                     <h2>Opportunities</h2>
@@ -153,26 +157,25 @@ Results
                     </form>
                 </div>
             </div> -->
-            <div id="page-scholarshipOpportunities"
-                class="page p-4 m-4 bg-purple-700 rounded-md flex flex-col items-center justify-start">
-                <div class="p-4 bg-white rounded-full w-auto text-center">
-                    <h2>Opportunities</h2>
-                </div>
-                <div class="serach ml-16 mt-2" id="search">
-                    <form id="jobSearchForm">
-                        <input type="search" name="job" id="job" autofocus autocomplete="off"
-                            placeholder="Search for a job"
-                            class="p-4 m-4 rounded-3xl focus:rounded-full bg-rose-200 placeholder:text-indigo-800 focus:outline-none focus:ring focus:ring-lime-200">
-                        <button type="submit"
-                            class="bg-blue-500 text-white p-4 rounded-xl hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200 transition duration-300">Search</button>
-                    </form>
-                </div>
-                
-                <!-- Job-Cards -->
-                <div class="jobContainer" id="jobGridContainer">
-
-                </div>
+        <div id="page-scholarshipOpportunities"
+            class="page p-4 m-4 bg-purple-700 rounded-md flex flex-col items-center justify-start hidden">
+            <div class="p-4 bg-white rounded-full w-auto text-center">
+                <h2>Opportunities</h2>
             </div>
+            <div class="serach ml-16 mt-2" id="search">
+                <form id="jobSearchForm">
+                    <input type="search" name="job" id="job" autofocus autocomplete="off" placeholder="Search for a job"
+                        class="p-3 m-4 rounded-3xl focus:rounded-full bg-rose-200 placeholder:text-indigo-800 focus:outline-none focus:ring focus:ring-lime-200">
+                    <button type="submit"
+                        class="bg-blue-500 text-white p-4 rounded-xl hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200 transition duration-300">Search</button>
+                </form>
+            </div>
+
+            <!-- Job-Cards -->
+            <div class="jobContainer" id="jobGridContainer">
+
+            </div>
+        </div>
 
         </div>
 
@@ -298,7 +301,43 @@ Results
 
         // Fetch and display Flask flash messages
         document.addEventListener("DOMContentLoaded", function () {
-            // displayJobs();
+            /* Study Material */
+            const fetchNumbersButton = document.getElementById('fetchNumbersButton');
+            const studyCardsContainer = document.getElementById('study-cards');
+
+            // Function to fetch data from the "Numbers 1" API
+            function fetchData() {
+                const apiKey = '648d1a0acamsheeb1c88c3ed9679p1b37ecjsn2133e3d076b0';
+                const apiUrl = 'https://numbersapi.p.rapidapi.com/1729/math';
+
+                fetch(apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        'X-RapidAPI-Key': apiKey
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Update each study card with the new data
+                        const studyCardElements = studyCardsContainer.getElementsByClassName('content');
+                        Array.from(studyCardElements).forEach((studyCard, index) => {
+                            studyCard.innerHTML = `<h3>${data.value} - ${index + 1}</h3>`;
+                        });
+
+                        console.log('Data fetched successfully:', data.value);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data:', error);
+                    });
+            }
+
+            // Fetch initial data when the page loads
+            fetchData();
+
+            // Listen for button click to fetch new data
+            fetchNumbersButton.addEventListener('click', fetchData);
+
+            /* Oppertunities */
             const jobSearchForm = document.getElementById('jobSearchForm');
             const opportunitiesContainer = document.getElementById('page-scholarshipOpportunities');
             const jobGridContainer = document.getElementById('jobGridContainer');
@@ -329,7 +368,7 @@ Results
                         // Clear previous job cards
                         jobGridContainer.innerHTML = '';
 
-                        
+
                         // const jobGridContainer = document.createElement('div');
                         jobGridContainer.classList.add('rounded-md', 'overflow-auto', 'grid', 'grid-cols-1', 'md:grid-cols-2', 'lg:grid-cols-3', 'gap-4');
 
