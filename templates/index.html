@@ -277,65 +277,49 @@ Results
             });
         }
 
-        /* function displayJobs() {
-            const jobsData = '{{ jobs_data }}';
-            const opportunitiesContainer = document.getElementById('page-scholarshipOpportunities');
-
-            if (opportunitiesContainer && jobsData) {
-                jobsData.forEach(job => {
-                    const jobCard = document.createElement('div');
-                    jobCard.classList.add('job-card', 'p-4', 'bg-white', 'rounded-md', 'my-4', 'w-full');
-
-                    jobCard.innerHTML = `
-                    <img src="${job.employer_logo}" alt="${job.employer_name}" class="mb-2" style="max-width: 100px;">
-                    <h3 class="text-xl font-semibold">${job.job_title}</h3>
-                    <p class="text-gray-600">${job.employer_name} - ${job.job_city}, ${job.job_state}</p>
-                    <p class="mt-2">${job.job_description}</p>
-                    <a href="${job.job_apply_link}" target="_blank" class="text-blue-500 hover:underline block mt-2">Apply Now</a>
-                `;
-
-                    opportunitiesContainer.appendChild(jobCard);
-                });
-            }
-        } */
-
         // Fetch and display Flask flash messages
         document.addEventListener("DOMContentLoaded", function () {
             /* Study Material */
-            const fetchNumbersButton = document.getElementById('fetchNumbersButton');
-            const studyCardsContainer = document.getElementById('study-cards');
+            const button = document.getElementById('fetchTopicsButton');
+            const container = document.getElementById('study-cards');
 
-            // Function to fetch data from the "Numbers 1" API
+            // Using Function to fetch data from the DEI2 API
             function fetchData() {
                 const apiKey = '648d1a0acamsheeb1c88c3ed9679p1b37ecjsn2133e3d076b0';
-                const apiUrl = 'https://numbersapi.p.rapidapi.com/1729/math';
+                const apiUrl = 'https://dei2.p.rapidapi.com/topics/';
 
                 fetch(apiUrl, {
                     method: 'GET',
                     headers: {
-                        'X-RapidAPI-Key': apiKey
+                        'X-RapidAPI-Key': apiKey,
+                        'X-RapidAPI-Host': 'dei2.p.rapidapi.com'
                     }
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        // Update each study card with the new data
-                        const studyCardElements = studyCardsContainer.getElementsByClassName('content');
-                        Array.from(studyCardElements).forEach((studyCard, index) => {
-                            studyCard.innerHTML = `<h3>${data.value} - ${index + 1}</h3>`;
-                        });
+                }).then(response => response.json()).then(data => {
+                    console.log('Raw Response:', data);
 
-                        console.log('Data fetched successfully:', data.value);
-                    })
-                    .catch(error => {
-                        console.error('Error fetching data:', error);
+                    // Update each study card with the new data
+                    const studyCardElements = container.getElementsByClassName('content');
+                    Array.from(studyCardElements).forEach((studyCard, index) => {
+                        const topic = data.value[index];
+
+                        // Display the data on the study card
+                        studyCard.innerHTML = `
+                            <h3 class="mb-4">${topic.name}</h3>
+                            <p>Shortname: ${topic.shortname}</p>
+                            <p>Services: ${topic.services.map(service => service.name).join(', ')}</p>
+                        `;
                     });
+                    console.log('Data fetched successfully:', data);
+                }).catch(error => {
+                    console.log('Error fetching data:', error);
+                });
             }
 
-            // Fetch initial data when the page loads
+            // Fetch initail data when the page loads
             fetchData();
 
-            // Listen for button click to fetch new data
-            fetchNumbersButton.addEventListener('click', fetchData);
+            // fetch new data when the user click on the button
+            button.addEventListener('click', fetchData);
 
             /* Oppertunities */
             const jobSearchForm = document.getElementById('jobSearchForm');
