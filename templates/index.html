@@ -277,51 +277,110 @@ Results
             });
         }
 
-        // Fetch and display Flask flash messages
-        document.addEventListener("DOMContentLoaded", function () {
-            /* Study Material */
-            const button = document.getElementById('fetchTopicsButton');
-            const container = document.getElementById('study-cards');
+        // Array of topics for query
+        const topicsList = [
+            'computer',
+            'computer science',
+            'maths',
+            'geometry',
+            'Muslims scientist',
+            'physics',
+            'chemistry',
+            'biology',
+            'AI',
+            'learning',
+            // Add more topics as needed
+        ];
 
-            // Using Function to fetch data from the DEI2 API
-            function fetchData() {
-                const apiKey = '648d1a0acamsheeb1c88c3ed9679p1b37ecjsn2133e3d076b0';
-                const apiUrl = 'https://dei2.p.rapidapi.com/topics/';
+        // Function to fetch data for a specific topic
+        /* async function fetchDataForTopic(topic) {
+            const apiKey = 'e7d2a943f2mshab5d5c0085b1ddcp144bf7jsnbb359a3107a0';
+            const apiUrl = `https://wikipedia-api1.p.rapidapi.com/get_summary?q=${topic}&lang=en&sentences=3`;
 
-                fetch(apiUrl, {
+            try {
+                const response = await fetch(apiUrl, {
                     method: 'GET',
                     headers: {
                         'X-RapidAPI-Key': apiKey,
-                        'X-RapidAPI-Host': 'dei2.p.rapidapi.com'
+                        'X-RapidAPI-Host': 'wikipedia-api1.p.rapidapi.com'
                     }
-                }).then(response => response.json()).then(data => {
-                    console.log('Raw Response:', data);
-
-                    // Update each study card with the new data
-                    const studyCardElements = container.getElementsByClassName('content');
-                    Array.from(studyCardElements).forEach((studyCard, index) => {
-                        const topic = data.value[index];
-
-                        // Display the data on the study card
-                        studyCard.innerHTML = `
-                            <h3 class="mb-4">${topic.name}</h3>
-                            <p>Shortname: ${topic.shortname}</p>
-                            <p>Services: ${topic.services.map(service => service.name).join(', ')}</p>
-                        `;
-                    });
-                    console.log('Data fetched successfully:', data);
-                }).catch(error => {
-                    console.log('Error fetching data:', error);
                 });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Raw Response for', topic, ':', data);
+
+                    return {
+                        name: topic,
+                        data: data.data
+                    };
+                } else {
+                    console.error('Error fetching data for', topic, ':', response.status, response.statusText);
+                    return null;
+                }
+            } catch (error) {
+                console.error('Error fetching data for', topic, ':', error);
+                return null;
+            }
+        }
+
+        // Function to fetch data for random topics
+        async function fetchRandomTopics() {
+            const selectedTopics = [];
+            const delay = 1000;
+            while (selectedTopics.length < 6 && topicsList.length > 0) {
+                const randomIndex = Math.floor(Math.random() * topicsList.length);
+                const randomTopic = topicsList.splice(randomIndex, 1)[0];
+                const topicData = await fetchDataForTopic(randomTopic);
+                if (topicData) {
+                    selectedTopics.push(topicData);
+                }
+            }
+            for (const topic of topicsList) {
+                const topicData = await fetchDataForTopic(topic);
+                if (topicData) {
+                    selectedTopics.push(topicData);
+                }
+
+                // Introduce a delay between requests
+                await new Promise(resolve => setTimeout(resolve, delay));
+            }
+            return selectedTopics;
+        } */
+
+
+        // Fetch and display Flask flash messages
+        document.addEventListener("DOMContentLoaded", function () {
+            /* Study Material */
+            /*const fetchTopicsButton = document.getElementById('fetchTopicsButton');
+            const container = document.getElementById('study-cards');
+
+            // Function to update study cards with fetched data
+            async function updateStudyCards() {
+                const selectedTopics = await fetchRandomTopics();
+                const studyCardElements = container.getElementsByClassName('content');
+                Array.from(studyCardElements).forEach((studyCard, index) => {
+                    const topic = selectedTopics[index];
+
+                    // Display the data on the study card
+                    if (topic) {
+                        studyCard.innerHTML = `
+                    <h3 class="mb-4">${topic.name}</h3>
+                    <p>${topic.data}</p>
+                `;
+                    }
+                });
+                console.log('Data fetched successfully for random topics:', selectedTopics);
             }
 
-            // Fetch initail data when the page loads
-            fetchData();
+            // Fetch initial data when the page loads
+            updateStudyCards();
 
-            // fetch new data when the user click on the button
-            button.addEventListener('click', fetchData);
+            // Fetch new data when the user clicks on the button
+            fetchTopicsButton.addEventListener('click', updateStudyCards); */
 
             /* Oppertunities */
+            /* I want to add a logic (when page loads the default job value should taken by api and show jobs on opportunities) */
             const jobSearchForm = document.getElementById('jobSearchForm');
             const opportunitiesContainer = document.getElementById('page-scholarshipOpportunities');
             const jobGridContainer = document.getElementById('jobGridContainer');

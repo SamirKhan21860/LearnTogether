@@ -51,6 +51,17 @@ CREATE TABLE assignment (
     FOREIGN KEY (student_id) REFERENCES students (id)
 );
 
+-- -- study material
+-- CREATE TABLE study_material (
+--   id INTEGER PRIMARY KEY AUTOINCREMENT,
+--   subject TEXT NOT NULL,
+--   title TEXT NOT NULL,
+--   short_description TEXT NOT NULL,
+--   category TEXT,
+--   link TEXT NOT NULL,
+--   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );
+
 -- -- Exam Schedules
 -- CREATE TABLE exam_schedules (
 --     id INTEGER PRIMARY KEY AUTOINCREMENT,
