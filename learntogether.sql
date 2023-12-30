@@ -52,15 +52,16 @@ CREATE TABLE assignment (
 );
 
 -- -- study material
--- CREATE TABLE study_material (
---   id INTEGER PRIMARY KEY AUTOINCREMENT,
---   subject TEXT NOT NULL,
---   title TEXT NOT NULL,
---   short_description TEXT NOT NULL,
---   category TEXT,
---   link TEXT NOT NULL,
---   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
--- );
+CREATE TABLE study_materials (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  subjects TEXT,
+  age_group TEXT,
+  title TEXT,
+  short_description TEXT,
+  category TEXT,
+  link TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 -- -- Exam Schedules
 -- CREATE TABLE exam_schedules (

@@ -26,7 +26,6 @@ def validate_class_name(class_name):
     
     return class_name_pattern.match(class_name)
 
-# i want to show sign up page for those who are not at our data base as student/teacher/admin whiAch can do using login-required i guess lets see
 
 # login required function
 def login_required(f):

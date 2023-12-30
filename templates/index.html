@@ -293,7 +293,7 @@ Results
         ];
 
         // Function to fetch data for a specific topic
-        /* async function fetchDataForTopic(topic) {
+        async function fetchDataForTopic(topic) {
             const apiKey = 'e7d2a943f2mshab5d5c0085b1ddcp144bf7jsnbb359a3107a0';
             const apiUrl = `https://wikipedia-api1.p.rapidapi.com/get_summary?q=${topic}&lang=en&sentences=3`;
 
@@ -346,13 +346,13 @@ Results
                 await new Promise(resolve => setTimeout(resolve, delay));
             }
             return selectedTopics;
-        } */
+        }
 
 
         // Fetch and display Flask flash messages
         document.addEventListener("DOMContentLoaded", function () {
             /* Study Material */
-            /*const fetchTopicsButton = document.getElementById('fetchTopicsButton');
+            const fetchTopicsButton = document.getElementById('fetchTopicsButton');
             const container = document.getElementById('study-cards');
 
             // Function to update study cards with fetched data
@@ -377,7 +377,7 @@ Results
             updateStudyCards();
 
             // Fetch new data when the user clicks on the button
-            fetchTopicsButton.addEventListener('click', updateStudyCards); */
+            fetchTopicsButton.addEventListener('click', updateStudyCards);
 
             /* Oppertunities */
             /* I want to add a logic (when page loads the default job value should taken by api and show jobs on opportunities) */
