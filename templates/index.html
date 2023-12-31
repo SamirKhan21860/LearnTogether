@@ -39,10 +39,13 @@ Results
         <div id="switchPages" class="switchPages flex justify-center flex-wrap">
 
             <div id="page-announcements"
-                class="page p-4 m-4 bg-purple-300 rounded-md flex items-start justify-center hidden">
+                class="page p-4 m-4 bg-purple-300 rounded-md flex flex-col items-center justify-start">
                 <div class="p-4 bg-white rounded-full text-center">
                     <h2 class="title text-lg font-bold text-gray-800">Announcements</h2>
                 </div>
+                <button id="fetchAnnouncementsButton"
+                    class="mt-4 px-6 py-3 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline">More
+                    Updtes</button>
             </div>
 
             <div id="page-classTiming"
@@ -53,7 +56,7 @@ Results
             </div>
 
             <div id="page-assignments"
-                class="page p-4 m-4 bg-amber-300 rounded-md flex flex-col items-center justify-start">
+                class="page p-4 m-4 bg-amber-300 rounded-md flex flex-col items-center justify-start hidden">
                 <div class="p-4 bg-white rounded-full text-center">
                     <h2 class="text-lg font-bold text-gray-800">Assignments</h2>
                 </div>
@@ -84,7 +87,7 @@ Results
 
 
             <!-- Display Added Assignments -->
-            <div class="mt-8 overflow-auto">
+            <div class="mt-8 overflow-auto rounded-md">
                 <h3 class="text-xl font-bold mb-4">Added Assignments:</h3>
                 <table class="min-w-full table-auto bg-amber-100">
                     <thead>
@@ -109,12 +112,16 @@ Results
         </div>
 
         <!-- Study Materials -->
-        <div id="page-studyMaterials" class="page pl-6 m-4 bg-purple-600 rounded-md flex flex-col items-center justify-start hidden">
+        <div id="page-studyMaterials"
+            class="page pl-6 m-4 bg-purple-600 rounded-md flex flex-col items-center justify-start hidden">
             <div class="p-4 my-4 bg-white rounded-full text-center">
                 <h2 class="text-lg font-bold text-gray-800">Study Materials</h2>
             </div>
-            <button id="fetchStudyMaterialsButton" class="mt-4 px-6 py-3 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline">Fetch New Data</button>
-            <div id="study-cards" class="overflow-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto mt-8 mb-8">
+            <button id="fetchStudyMaterialsButton"
+                class="mt-4 px-6 py-3 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline">Fetch
+                New Data</button>
+            <div id="study-cards"
+                class="overflow-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto mt-8 mb-8">
                 <!-- STUDY_CARDS will be ADDED HERE WHEN DOM LOADS CONTENT -->
             </div>
         </div>
@@ -245,46 +252,76 @@ Results
         ]; */
 
         // Function to fetch new study materials
-            async function fetchNewStudyMaterials() {
-                const response = await fetch('/study_materials');
-                if (response.ok) {
-                    const newData = await response.json();
-                    updateStudyMaterials(newData);
-                } else {
-                    console.error('Error fetching new study materials:', response.status, response.statusText);
-                }
+        async function fetchNewData(endpoint, updateFunction) {
+            const response = await fetch(endpoint);
+            if (response.ok) {
+                const newData = await response.json();
+                updateStudyMaterials(newData);
+            } else {
+                console.error(`Error fetching new data from ${endpoint}:`, response.status, response.statusText);
             }
+        }
 
-            // Function to update study materials with new data
-            function updateStudyMaterials(newData) {
-                const studyCardsContainer = document.getElementById('study-cards');
-                studyCardsContainer.innerHTML = ''; // Clear existing data
+        // Function to update study materials with new data
+        function updateStudyMaterials(newData) {
+            const studyCardsContainer = document.getElementById('study-cards');
+            studyCardsContainer.innerHTML = ''; // Clear existing data
 
-                // Iterate through the new data and append study material cards
-                newData.forEach(material => {
-                    const studyCard = document.createElement('div');
-                    studyCard.classList.add('p-4', 'hover:p-6', 'rounded-lg', 'bg-purple-400', 'shadow', 'shadow-2xl', 'opacity-75', 'hover:opacity-100', 'transition-all', 'duration-300', 'flex', 'flex-col', 'justify-between', 'mb-4');
+            // Iterate through the new data and append study material cards
+            newData.forEach(material => {
+                const studyCard = document.createElement('div');
+                studyCard.classList.add('p-4', 'hover:p-6', 'rounded-lg', 'bg-purple-400', 'shadow', 'shadow-2xl', 'opacity-75', 'hover:opacity-100', 'transition-all', 'duration-300', 'flex', 'flex-col', 'justify-between', 'mb-4');
 
-                    studyCard.innerHTML = `
+                studyCard.innerHTML = `
                         <h3 class="text-xl font-semibold mb-2">${material.title}</h3>
                         <p class="text-gray-600 mb-2">${material.age_group} - ${material.category}</p>
                         <p class="text-gray-800 mb-4">${material.short_description}</p>
                         <a href="${material.link}" class="text-blue-500 hover:underline" target="_blank">Learn More</a>
                     `;
 
-                    studyCardsContainer.appendChild(studyCard);
-                });
-            }
+                studyCardsContainer.appendChild(studyCard);
+            });
+        }
 
-            // Fetch unique study materials when the button is clicked
-            const fetchStudyMaterialsButton = document.getElementById('fetchStudyMaterialsButton');
-            fetchStudyMaterialsButton.addEventListener('click', fetchNewStudyMaterials);
+        // Function to update announcements with new data
+        function updateAnnouncements(newData) {
+            const announcementsContainer = document.getElementById('announcements-container');
+            announcementsContainer.innerHTML = ''; // Clear existing data
+
+            // Iterate through the new data and append announcement cards
+            newData.forEach(announcement => {
+                const announcementCard = document.createElement('div');
+                announcementCard.classList.add('p-4', 'rounded-lg', 'bg-purple-300', 'shadow', 'shadow-2xl', 'opacity-75', 'mb-4');
+
+                announcementCard.innerHTML = `
+                <h3 class="text-lg font-bold mb-2">${announcement.title}</h3>
+                <p class="text-gray-800 mb-4">${announcement.content}</p>
+                <div class="text-sm text-gray-600">${announcement.author} - ${formatPostedDate(announcement.posted_at)}</div>
+            `;
+
+                announcementsContainer.appendChild(announcementCard);
+            });
+        }
+
+        // Fetch unique study materials when the button is clicked
+        const fetchStudyMaterialsButton = document.getElementById('fetchStudyMaterialsButton');
+        fetchStudyMaterialsButton.addEventListener('click', () => fetchNewData('/study_materials', updateStudyMaterials));
+
+        // Fetch unique announcements when the button is clicked
+        const fetchAnnouncementsButton = document.getElementById('fetchAnnouncementsButton');
+        fetchAnnouncementsButton.addEventListener('click', () => fetchNewData('/announcements', updateAnnouncements));
 
         // Fetch and display Flask flash messages
         document.addEventListener("DOMContentLoaded", function () {
             /* Study Material */
-            fetchNewStudyMaterials()
+            // Fetch and display initial study materials
+            fetchNewData('/study_materials', updateStudyMaterials);
 
+            // Fetch and display initial announcements
+            fetchNewData('/announcements', updateAnnouncements);
+
+            // fetch jobs for scholarships by default
+            fetchJobs("scholarships")
 
             /* Oppertunities */
             /* I want to add a logic (when page loads the default job value should taken by api and show jobs on opportunities) */
