@@ -11,13 +11,13 @@ def flash_message(message, category='default'):
 
 def check_required_fields(fields, current_page):
     missing_fields = [field for field, value in fields.items() if not value]
-    
+
     # If fields missing then show message
     if missing_fields:
         for field in missing_fields:
             flash_message(f"{field.capitalize()} is required.", category='error')
         return render_template(f"{current_page}.html")
-    
+
     # Give us None in return if all good
     return None
 
@@ -25,7 +25,7 @@ def check_required_fields(fields, current_page):
 def validate_class_name(class_name):
     # Validate Class Name using a regular expression
     class_name_pattern = re.compile(r'^[A-Za-z0-9_\-]+$')
-    
+
     return class_name_pattern.match(class_name)
 
 
@@ -47,10 +47,10 @@ def get_data_from_db(db, session, query, shown_key):
     """Fetch data from the database."""
     # Fetch all data from the database
     all_data = db.execute(query)
-    
+
     # Get the list of data already shown
     shown_data = session.get(shown_key, [])
-    
+
     # Find unique data that hasn't been shown
     unique_data = [item for item in all_data if item['id'] not in shown_data]
 
@@ -71,5 +71,14 @@ def get_data_from_db(db, session, query, shown_key):
 # Using get_announcements to get data from database
 def get_announcements(db, session):
     all_announcements = db.execute('SELECT * FROM announcements')
-    
+
     show_updates = session.get('new_updates', [])
+
+
+# Query data from database for class timing
+def get_class_timing(db):
+    """Fetch class timing data from the database."""
+    # Fetch all class timing data from the database
+    all_class_timing = db.execute('SELECT * FROM class_timing')
+
+    return all_class_timing

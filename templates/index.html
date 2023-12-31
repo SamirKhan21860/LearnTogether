@@ -39,7 +39,7 @@ Results
         <div id="switchPages" class="switchPages flex justify-center flex-wrap">
 
             <div id="page-announcements"
-                class="page p-4 m-4 bg-purple-300 rounded-md flex flex-col items-center justify-start">
+                class="page p-4 m-4 bg-purple-300 rounded-md flex flex-col items-center justify-start hidden">
                 <div class="p-4 bg-white rounded-full text-center">
                     <h2 class="title text-lg font-bold text-gray-800">Announcements</h2>
                 </div>
@@ -51,11 +51,15 @@ Results
                     </div>
             </div>
 
+            <!-- Class Timing -->
             <div id="page-classTiming"
-                class="page p-4 m-4 bg-purple-400 rounded-md flex items-start justify-center hidden">
-                <div class="p-4 bg-white rounded-full text-center">
-                    <h2 class="text-lg font-bold text-gray-800">Class Timing</h2>
-                </div>
+            class="page p-4 m-4 bg-purple-400 rounded-md flex flex-col items-center justify-start">
+            <div class="p-4 bg-white rounded-full text-center">
+            <h2 class="text-lg font-bold text-gray-800">Class Timing</h2>
+            </div>
+            <div id="class-timing-container" class="rounded-md overflow-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto mt-8 mb-8">
+            <!-- CLASS_TIMINGS will be ADDED HERE WHEN DOM LOADS CONTENT -->
+            </div>
             </div>
 
             <div id="page-assignments"
@@ -121,8 +125,7 @@ Results
                 <h2 class="text-lg font-bold text-gray-800">Study Materials</h2>
             </div>
             <button id="fetchStudyMaterialsButton"
-                class="mt-4 px-6 py-3 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline">Fetch
-                New Data</button>
+                class="mt-4 px-6 py-3 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline">More Topics</button>
             <div id="study-cards"
                 class="rounded-md overflow-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto mt-8 mb-8">
                 <!-- STUDY_CARDS will be ADDED HERE WHEN DOM LOADS CONTENT -->
@@ -261,13 +264,35 @@ Results
                 const newData = await response.json();
                 if (endpoint == '/study_materials') {
                     updateStudyMaterials(newData);
-                } else {
-                    updateAnnouncements(newData)
+                } else if (endpoint == '/announcements') {
+                    updateAnnouncements(newData);
+                } else if (endpoint == '/class_timing') {
+                    displayClassTiming(newData);
                 }
             } else {
                 console.error(`Error fetching new data from ${endpoint}:`, response.status, response.statusText);
             }
         }
+
+        // Function to display class timing
+    function displayClassTiming(classTimingData) {
+        const classTimingContainer = document.getElementById('class-timing-container');
+        classTimingContainer.innerHTML = ''; // Clear existing data
+
+        // Iterate through the data and append class timing cards
+        classTimingData.forEach(timing => {
+            const timingCard = document.createElement('div');
+            timingCard.classList.add('p-4', 'rounded-lg', 'bg-purple-500', 'hover:bg-purple-300', 'transition-all', 'duration-300', 'opacity-75', 'hover:opacity-100', 'shadow', 'mb-4', 'hover:mb-6');
+
+            timingCard.innerHTML = `
+                <h3 class="text-xl font-semibold mb-2">${timing.class_name}</h3>
+                <p class="text-gray-600 mb-2">${timing.day_of_week}</p>
+                <p class="text-gray-800">${timing.start_time} - ${timing.end_time}</p>
+            `;
+
+            classTimingContainer.appendChild(timingCard);
+        });
+    }
 
         // Function to update study materials with new data
         function updateStudyMaterials(newData) {
@@ -332,6 +357,9 @@ Results
 
             // Fetch and display initial announcements
             fetchNewData('/announcements', updateAnnouncements);
+
+            // Fetch and display classes timing when the document loads
+            fetchNewData('/class_timing', displayClassTiming)
 
             // fetch jobs for scholarships by default
             // fetchJobs("Internships for students")

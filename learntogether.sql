@@ -54,6 +54,15 @@ CREATE TABLE study_materials (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Class Timing
+CREATE TABLE class_timing (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    class_name TEXT NOT NULL,
+    day_of_week TEXT NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL
+);
+
 -- -- Exam Schedules
 CREATE TABLE exam_schedules (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
