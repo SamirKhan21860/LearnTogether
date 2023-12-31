@@ -109,13 +109,12 @@ Results
         </div>
 
         <!-- Study Materials -->
-        <div id="page-studyMaterials"
-            class="page pl-6 m-4 bg-purple-600 rounded-md flex flex-col items-center justify-center">
+        <div id="page-studyMaterials" class="page pl-6 m-4 bg-purple-600 rounded-md flex flex-col items-center justify-center">
             <div class="p-4 bg-white rounded-full text-center">
-                <h2>Study Materials</h2>
+                <h2 class="text-3xl font-bold text-gray-800">Study Materials</h2>
             </div>
-            <button id="fetchStudyMaterialsButton">Fetch New Data</button>
-            <div id="study-cards" class="container grid grid-cols-3 gap-4 mx-auto text-white ml-4 mt-8 mb-8">
+            <button id="fetchStudyMaterialsButton" class="mt-4 px-6 py-3 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline">Fetch New Data</button>
+            <div id="study-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto mt-8 mb-8">
                 <!-- STUDY_CARDS will be ADDED HERE WHEN DOM LOADS CONTENT -->
             </div>
         </div>
@@ -264,14 +263,14 @@ Results
                 // Iterate through the new data and append study material cards
                 newData.forEach(material => {
                     const studyCard = document.createElement('div');
-                    studyCard.classList.add('content', 'p-4', 'hover:p-6', 'rounded-lg', 'bg-purple-400', 'w-40', 'hover:w-48', 'hover:h-48', 'shadow', 'shadow-2xl', 'opacity-75', 'hover:opacity-100', 'h-40', 'transition-all', 'duration-300', 'flex', 'flex-col', 'justify-between');
+                    studyCard.classList.add('p-4', 'hover:p-6', 'rounded-lg', 'bg-purple-400', 'shadow', 'shadow-2xl', 'opacity-75', 'hover:opacity-100', 'transition-all', 'duration-300', 'flex', 'flex-col', 'justify-between', 'mb-4');
 
                     studyCard.innerHTML = `
-                <h3 class="text-xl font-semibold mb-2">${material.title}</h3>
-                <p class="text-gray-600 mb-2">${material.age_group} - ${material.category}</p>
-                <p class="text-gray-800 mb-4">${material.short_description}</p>
-                <a href="${material.link}" class="text-blue-500 hover:underline" target="_blank">Learn More</a>
-            `;
+                        <h3 class="text-xl font-semibold mb-2">${material.title}</h3>
+                        <p class="text-gray-600 mb-2">${material.age_group} - ${material.category}</p>
+                        <p class="text-gray-800 mb-4">${material.short_description}</p>
+                        <a href="${material.link}" class="text-blue-500 hover:underline" target="_blank">Learn More</a>
+                    `;
 
                     studyCardsContainer.appendChild(studyCard);
                 });
@@ -285,7 +284,7 @@ Results
         document.addEventListener("DOMContentLoaded", function () {
             /* Study Material */
             fetchNewStudyMaterials()
-            
+
 
             /* Oppertunities */
             /* I want to add a logic (when page loads the default job value should taken by api and show jobs on opportunities) */
