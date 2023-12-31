@@ -7,9 +7,9 @@
 .dropdown {
     display: none;
     position: absolute;
-    right: 1.2%;
+    right: 1.05%;
     padding: 8px;
-    top: 10%;
+    /* top: 24%; */
     background-color: #F2CB05;
     /* Tailwind CSS indigo color */
     border-radius: 15px;
@@ -35,4 +35,9 @@
     background-color: #2d3748;
     color: white;
     /* Tailwind CSS gray-darker color on hover */
+}
+
+.page {
+    width: 800px;
+    height: 610px;
 }

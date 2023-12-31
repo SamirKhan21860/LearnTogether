@@ -1,42 +1,55 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Sign Up
+    Complaint
 {% endblock %}
 
-{% block signUp %}
+{% block complaint %}
 
-<body class="bg-[#F2E3B6]">
-    <div class="absolute w-full mt-4 pl-20 pr-20 pb-20 flex items-center justify-center">
-        <div class="p-8 rounded-3xl w-screen max-w-sm text-center">
+<body class="bg-[rgb(245,215,180)]">
 
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 justify-center flex items-center">Sign Up</h1>
-            <p class="text-gray-600 mb-4 justify-center flex items-center">Provide email and password</p>
+    <div class="max-w-md mx-auto bg-gray-900 p-8 my-6 rounded-3xl shadow-md">
+        <h2 class="text-2xl font-bold mb-6 text-white">Submit a Complaint or Request</h2>
 
-            <form action="/signup" method="post" class="login-form">
-                <div class="mb-4">
-                    <input type="text" autofocus class="w-48 md:w-64 p-4 rounded-full bg-[#D6F2FE] placeholder-black"
-                        id="name" name="full_name" placeholder="Full Name">
-                </div>
-                <div class="mb-4">
-                    <input type="email" class="w-48 md:w-64 p-4 rounded-full bg-[#D6F2FE] placeholder-black" id="email"
-                        name="email" placeholder="Email">
-                </div>
-                <div class="mb-4">
-                    <input type="password" class="w-48 md:w-64 p-4 rounded-full bg-[#D6F2FE] placeholder-black" id="password"
-                        name="password" placeholder="Password">
-                </div>
-                <div class="mb-6">
-                    <input type="text" class="w-48 md:w-64 p-4 rounded-full bg-[#D6F2FE] placeholder-black" id="class"
-                        name="class" placeholder="Class Name / Subject">
-                </div>
-                <button type="submit"
-                    class="w-48 md:w-64 p-4 bg-blue-500 text-white rounded-full hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200">Sign
-                    Up</button>
-            </form>
-        </div>
+        <form id="complaintForm" action="/complaint" method="POST">
+            <div class="mb-4">
+                <label for="submissionType" class="block text-sm font-semibold text-gray-200 text-white">Type of
+                    Submission:</label>
+                <select name="submissionType" id="submissionType" class="w-full mt-1 p-2 border rounded-md">
+                    <option value="" default disabled selected>Select</option>
+                    <option value="complaint">Complaint</option>
+                    <option value="request">Request</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="category" class="block text-sm font-semibold text-gray-200">Category:</label>
+                <select name="category" id="category" class="w-full mt-1 p-2 border rounded-md">
+                    <option value="" default disabled selected>Select Option</option>
+                    <option value="academic">Academic</option>
+                    <option value="facilities">Facilities</option>
+                    <option value="administration">Administration</option>
+                    <option value="exams">Exams</option>
+                    <option value="students">Students</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="subject" class="block text-sm font-semibold text-gray-200">Subject:</label>
+                <input type="text" name="subject" id="subject" class="w-full mt-1 p-2 border rounded-md">
+            </div>
+
+            <div class="mb-4">
+                <label for="description" class="block text-sm font-semibold text-gray-200">Description:</label>
+                <textarea name="description" id="description" rows="4"
+                    class="w-full mt-1 p-2 border rounded-md"></textarea>
+            </div>
+
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Submit</button>
+        </form>
     </div>
 
+<!-- Flash Messages -->
     <div id="flash-container" class="absolute top-0 right-0"></div>
 
     <script>
@@ -57,7 +70,7 @@ Sign Up
                 flashContainer.id = "flash-container";
                 flashContainer.classList.add("absolute", "top-0", "right-0");
                 document.body.appendChild(flashContainer);
-            }
+            } 
 
             // Now create a new flash message div element
             var flashMessage = document.createElement("div");
@@ -85,23 +98,15 @@ Sign Up
             // Using timeout to automatically remove the flash message after 5 seconds
             setTimeout(function () {
                 closeFlashMessage(flashMessage);
-            }, 3000);
-
-            // Triggering a reflow to apply initial styles before applying animation
-            flashMessage.offsetHeight;
-
-            // Adding the animation class to initiate the fade-in effect
-            flashMessage.classList.add("opacity-100", "translate-x-0");
+            }, 3900);
         }
 
         function closeFlashMessage(flashMessage) {
             // Slide out the flash message
-            flashMessage.style.transition = 'transform 0.3s ease-in-out, opacity 0.3s ease-in-out';
-            //flashMessage.style.transform = 'translateX(110%)';
-            flashMessage.style.transform = 'translate-y-full';
-            flashMessage.style.opacity = '0';
+            flashMessage.style.transition = 'transform 0.3s ease-in-out';
+            flashMessage.style.transform = 'translateX(110%)';
 
-            // Remove the element from the DOM after the transition completes
+            // Remove the lement from the DOM after the transition completes
             flashMessage.addEventListener('transitionend', function () {
                 flashMessage.remove();
             });
@@ -122,5 +127,7 @@ Sign Up
         });
 
     </script>
+
 </body>
+
 {% endblock %}

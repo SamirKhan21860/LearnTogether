@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="refresh" content="3"> -->
     <link rel="stylesheet" href="/static/styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Student: {% block title %}{% endblock %}</title>
@@ -25,7 +26,7 @@
             <li><a class="bg-[#aff4c6] rounded-full px-4 py-2 hover:bg-black hover:text-[#aff4c6] transition duration-300"
                     href="/classes">Classes</a></li>
             <li><a class="bg-[#aff4c6] rounded-full px-4 py-2 hover:bg-black hover:text-[#aff4c6] transition duration-300"
-                    href="/assign">Assignments</a></li>
+                    href="/complaint">Request</a></li>
             <li><a class="bg-[#aff4c6] rounded-full px-4 py-2 hover:bg-black hover:text-[#aff4c6] transition duration-300"
                     href="/exams">Exams</a></li>
             <li><a class="bg-[#aff4c6] rounded-full px-4 py-2 hover:bg-black hover:text-[#aff4c6] transition duration-300"
@@ -34,7 +35,7 @@
 
         <!-- Burger Menu Button -->
         <div class="block">
-            <button id="burger-menu" class="text-black hover:text-gray-800 focus:outline-none">
+            <button id="burger-menu" class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" height="64" viewBox="0 -960 960 960" width="64">
                     <path
                         d="M160-240q-17 0-28.5-11.5T120-280q0-17 11.5-28.5T160-320h640q17 0 28.5 11.5T840-280q0 17-11.5 28.5T800-240H160Zm0-200q-17 0-28.5-11.5T120-480q0-17 11.5-28.5T160-520h640q17 0 28.5 11.5T840-480q0 17-11.5 28.5T800-440H160Zm0-200q-17 0-28.5-11.5T120-680q0-17 11.5-28.5T160-720h640q17 0 28.5 11.5T840-680q0 17-11.5 28.5T800-640H160Z" />
@@ -67,31 +68,55 @@
     <hr class="divider border-t-2 border-white mx-2">
 
     <!-- LOG IN TEMPLATE -->
-    <div class="absolute w-full mt-4 pl-20 pr-20 pb-20 flex items-center justify-center">
-        {% block logIn %}
-        {% endblock %}
-    </div>
+    {% block logIn %}
+    {% endblock %}
 
     <!-- SIGN UP TEMPLATE -->
-    <div class="absolute w-full mt-4 pl-20 pr-20 pb-20 flex items-center justify-center">
-        {% block signUp %}
-        {% endblock %}
-    </div>
+    {% block signUp %}
+    {% endblock %}
 
     <!-- Index TEMPLATE -->
-    <div class="log-in absolute w-full mt-4 pl-20 pr-20 pb-20 flex items-center justify-center">
-        {% block index %}
-        {% endblock %}
-    </div>
+    {% block index %}
+    {% endblock %}
 
-    <!-- Loading the "message" and the "button" functionality-->
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-    
+    <!-- complaint TEMPLATE -->
+    {% block complaint %}
+    {% endblock %}
+
     <!-- FLASH MESSAGES -->
-    <div class="absolute w-full mt-4 pl-20 pr-20 pb-20 flex items-center justify-center">
-        {% block flash_messages %}
-        {% endblock %}
-    </div>
+    {% block flash_messages %}
+    {% endblock %}
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("Burger menu is fully loaded!");
+            // Get the dropdown and button elements
+            var dropdown = document.getElementById("burger-menu-content");
+            var button = document.getElementById("burger-menu");
+
+            if (button) {
+                // Function to close the dropdown by adding 'hidden' and removing 'block'
+                function closeDropdown() {
+                    dropdown.classList.add("hidden");
+                    dropdown.classList.remove("block");
+                }
+
+                // Toggle visibility of the dropdown on button click
+                button.addEventListener("click", function (event) {
+                    event.stopPropagation(); // Prevent the window click event from firing immediately
+                    dropdown.classList.remove("hidden");
+                    dropdown.classList.toggle("block");
+                });
+
+                // Close the dropdown when clicking outside of it
+                window.addEventListener("click", function (event) {
+                    if (!dropdown.contains(event.target) && !button.contains(event.target)) {
+                        closeDropdown();
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
