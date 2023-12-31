@@ -11,13 +11,13 @@ def flash_message(message, category='default'):
 
 def check_required_fields(fields, current_page):
     missing_fields = [field for field, value in fields.items() if not value]
-    
+
     # If fields missing then show message
     if missing_fields:
         for field in missing_fields:
             flash_message(f"{field.capitalize()} is required.", category='error')
         return render_template(f"{current_page}.html")
-    
+
     # Give us None in return if all good
     return None
 
@@ -25,7 +25,7 @@ def check_required_fields(fields, current_page):
 def validate_class_name(class_name):
     # Validate Class Name using a regular expression
     class_name_pattern = re.compile(r'^[A-Za-z0-9_\-]+$')
-    
+
     return class_name_pattern.match(class_name)
 
 
@@ -44,26 +44,28 @@ def generate_secret_key(length=32):
 
 
 # Query data from database
-def get_new_study_materials(db, session):
-    """Fetch study materials from the database."""
-    # Fetch all study materials from the database
-    all_study_materials = db.execute('SELECT * FROM study_materials')
+def get_data_from_db(db, session, query, shown_key):
+    """Fetch data from the database."""
     
-    # Get the list of materials already shown
-    shown_materials = session.get('shown_materials', [])
-     # Find unique materials that haven't been shown
-    unique_materials = [material for material in all_study_materials if material['id'] not in shown_materials]
+    # Fetch all data from the database
+    all_data = db.execute(query)
 
-    # If all materials have been shown, reset the list
-    if not unique_materials:
-        shown_materials.clear()
+    # Get the list of data already shown
+    shown_data = session.get(shown_key, [])
 
-    # Choose a random set of materials
-    random.shuffle(unique_materials)
-    selected_materials = unique_materials[:6]
+    # Find unique data that hasn't been shown
+    unique_data = [item for item in all_data if item['id'] not in shown_data]
 
-    # Update the list of shown materials in the session
-    shown_materials.extend(material['id'] for material in selected_materials)
-    session['shown_materials'] = shown_materials
+    # If all data have been shown, reset the list
+    if not unique_data:
+        shown_data.clear()
 
-    return selected_materials
+    # Choose a random set of data
+    random.shuffle(unique_data)
+    selected_data = unique_data[:6]
+
+    # Update the list of shown data in the session
+    shown_data.extend(item['id'] for item in selected_data)
+    session[shown_key] = shown_data
+
+    return selected_data

@@ -6,7 +6,7 @@ from flask import Flask, request, redirect, url_for, render_template, session
 from flask_session import Session
 from cs50 import SQL
 from werkzeug.security import check_password_hash, generate_password_hash
-from helpers import flash_message, login_required, generate_secret_key, validate_class_name, check_required_fields, get_new_study_materials
+from helpers import flash_message, login_required, generate_secret_key, validate_class_name, check_required_fields, get_data_from_db
 
 # Create a Flask web application instance
 app = Flask(__name__)
@@ -127,9 +127,6 @@ def classes():
     return render_template("classes.html")
 
 
-
-
-
 # Define route for creating assignments
 @app.route("/assign", methods=['GET', 'POST'])
 @login_required
@@ -192,8 +189,14 @@ def complaint():
 # Route to render the study materials page
 @app.route('/study_materials', methods=['GET'])
 def study_materials():
-    study_new_materials_data = get_new_study_materials(db, session)
+    study_new_materials_data = get_data_from_db(db, session, 'SELECT * FROM study_materials', 'shown_materials')
     return jsonify(study_new_materials_data)
+
+# Route to render the announcements page
+@app.route('/announcements', methods=['GET'])
+def announcements():
+    announcements_data = get_data_from_db(db, session, 'SELECT * FROM announcements', 'shown_announcements')
+    return jsonify(announcements_data)
 
 
 # Run the Flask application in debug mode
