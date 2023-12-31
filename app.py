@@ -173,14 +173,6 @@ def exams():
     return render_template('exams.html', exam_schedules=exam_schedules_data)
 
 
-# Define route for displaying classes
-# @app.route("/classes")
-# @login_required
-# def classes():
-#     # Render the classes template
-#     return render_template("classes.html")
-
-
 # Route to render the class timing page
 @app.route('/class_timing', methods=['GET'])
 def class_timing():
