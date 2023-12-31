@@ -63,16 +63,6 @@ CREATE TABLE class_timing (
     end_time TIME NOT NULL
 );
 
--- -- Exam Schedules
-CREATE TABLE exam_schedules (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    exam_name TEXT NOT NULL,
-    exam_date DATE NOT NULL,
-    exam_time TIME NOT NULL,
-    exam_room TEXT
-);
-
-
 -- .save and .read: Save and load SQL commands from a file.
 
 -- .save filename: Save the current SQLite3 session to a file.

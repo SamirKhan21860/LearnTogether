@@ -82,3 +82,9 @@ def get_class_timing(db):
     all_class_timing = db.execute('SELECT * FROM class_timing')
 
     return all_class_timing
+
+
+def get_exam_schedules(db):
+    """Fetch exam schedules from the database."""
+    exam_schedules = db.execute('SELECT * FROM exam_schedules')
+    return exam_schedules

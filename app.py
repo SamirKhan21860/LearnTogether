@@ -6,7 +6,7 @@ from flask import Flask, request, redirect, url_for, render_template, session
 from flask_session import Session
 from cs50 import SQL
 from werkzeug.security import check_password_hash, generate_password_hash
-from helpers import flash_message, login_required, generate_secret_key, validate_class_name, check_required_fields, get_data_from_db, get_class_timing
+from helpers import flash_message, login_required, generate_secret_key, validate_class_name, check_required_fields, get_data_from_db, get_class_timing, get_exam_schedules
 
 # Create a Flask web application instance
 app = Flask(__name__)
@@ -166,20 +166,19 @@ def complaint():
     return render_template("complaint_or_request.html")
 
 
-# Define route for displaying exams
-@app.route("/exams")
-@login_required
+# Route to render the exams page
+@app.route('/exams', methods=['GET'])
 def exams():
-    # Render the exams template
-    return render_template("exams.html")
+    exam_schedules_data = get_exam_schedules(db)
+    return render_template('exams.html', exam_schedules=exam_schedules_data)
 
 
 # Define route for displaying classes
-@app.route("/classes")
-@login_required
-def classes():
-    # Render the classes template
-    return render_template("classes.html")
+# @app.route("/classes")
+# @login_required
+# def classes():
+#     # Render the classes template
+#     return render_template("classes.html")
 
 
 # Route to render the class timing page
