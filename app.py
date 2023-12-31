@@ -29,7 +29,8 @@ def index():
         assignment = db.execute("SELECT * FROM assignment WHERE student_id = ?", session["user_id"])
         # Render the homepage template with assignment data
         return render_template("index.html", assignment=assignment)
-    
+
+    return render_template("index.html")
 
 # Define route for user signup
 @app.route("/signup", methods=["GET", "POST"])
