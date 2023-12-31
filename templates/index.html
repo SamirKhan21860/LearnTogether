@@ -282,7 +282,7 @@ Results
         // Iterate through the data and append class timing cards
         classTimingData.forEach(timing => {
             const timingCard = document.createElement('div');
-            timingCard.classList.add('p-4', 'rounded-lg', 'bg-purple-400', 'hover:bg-purple-300', 'shadow', 'opacity-75', 'mb-4');
+            timingCard.classList.add('p-4', 'rounded-lg', 'bg-purple-500', 'hover:bg-purple-300', 'transition-all', 'duration-300', 'opacity-75', 'hover:opacity-100', 'shadow', 'mb-4', 'hover:mb-6');
 
             timingCard.innerHTML = `
                 <h3 class="text-xl font-semibold mb-2">${timing.class_name}</h3>
