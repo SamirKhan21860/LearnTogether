@@ -108,55 +108,19 @@ Results
 
         </div>
 
+        <!-- Study Materials -->
         <div id="page-studyMaterials"
             class="page pl-6 m-4 bg-purple-600 rounded-md flex flex-col items-center justify-center">
             <div class="p-4 bg-white rounded-full text-center">
                 <h2>Study Materials</h2>
             </div>
-            <button id="fetchNumbersButton">Fetch New Data</button>
+            <button id="fetchStudyMaterialsButton">Fetch New Data</button>
             <div id="study-cards" class="container grid grid-cols-3 gap-4 mx-auto text-white ml-4 mt-8 mb-8">
-                <div
-                    class="content p-4 hover:p-6 rounded-lg bg-purple-400 w-40 hover:w-48 hover:h-48 shadow shadow-2xl opacity-75 hover:opacity-100 h-40 transition-all duration-300">
-                    <h3>Heading 1</h3>
-                </div>
-                <div
-                    class="content p-4 hover:p-6 rounded-lg bg-purple-500 w-40 hover:w-48 hover:h-48 shadow shadow-2xl opacity-75 hover:opacity-100 h-40 transition-all duration-300">
-                    <h3>Heading 2</h3>
-                </div>
-                <div
-                    class="content p-4 hover:p-6 rounded-lg bg-purple-300 w-40 hover:w-48 hover:h-48 shadow shadow-2xl opacity-75 hover:opacity-100 h-40 transition-all duration-300">
-                    <h3>Heading 3</h3>
-                </div>
-                <div
-                    class="content p-4 hover:p-6 rounded-lg bg-purple-300 w-40 hover:w-48 hover:h-48 shadow shadow-2xl opacity-75 hover:opacity-100 h-40 transition-all duration-300">
-                    <h3>Heading 4</h3>
-                </div>
-                <div
-                    class="content p-4 hover:p-6 rounded-lg bg-purple-500 w-40 hover:w-48 hover:h-48 shadow shadow-2xl opacity-75 hover:opacity-100 h-40 transition-all duration-300">
-                    <h3>Heading 5</h3>
-                </div>
-                <div
-                    class="content p-4 hover:p-6 rounded-lg bg-purple-400 w-40 hover:w-48 hover:h-48 shadow shadow-2xl opacity-75 hover:opacity-100 h-40 transition-all duration-300">
-                    <h3>Heading 6</h3>
-                </div>
+                <!-- STUDY_CARDS will be ADDED HERE WHEN DOM LOADS CONTENT -->
             </div>
         </div>
 
-        <!-- <div id="page-scholarshipOpportunities"
-                class="page p-4 m-4 bg-purple-700 rounded-md flex flex-col items-center justify-center">
-                <div class="p-4 bg-white rounded-full w-auto text-center">
-                    <h2>Opportunities</h2>
-                </div>
-                <div id="jobSearchForm">
-                    <form action="/" method="post">
-                        <input type="search" name="job" id="job" autofocus autocomplete="off"
-                            placeholder="Search for job"
-                            class="p-4 m-4 rounded-3xl focus:rounded-full bg-rose-200 placeholder:text-indigo-800 focus:outline-none focus:ring focus:ring-lime-200">
-                        <button type="submit"
-                            class="bg-blue-500 text-white p-4 rounded-xl hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200 transition duration-300">Search</button>
-                    </form>
-                </div>
-            </div> -->
+        <!-- Scholarship Opportunities -->
         <div id="page-scholarshipOpportunities"
             class="page p-4 m-4 bg-purple-700 rounded-md flex flex-col items-center justify-start hidden">
             <div class="p-4 bg-white rounded-full w-auto text-center">
@@ -201,17 +165,6 @@ Results
                 }
             });
         }
-
-        /* function showPage(pageId) {
-            const switchPages = document.getElementById('switchPages');
-            const selectedPage = document.getElementById(`page-${pageId}`);
-
-            // Calculate the left offset to slide the selected page into view
-            const leftOffset = selectedPage.offsetLeft;
-
-            // Slide to the selected page
-            switchPages.scrollTo({ left: leftOffset, behavior: 'smooth' });
-        } */
 
         // Mapping of categories to Tailwind CSS classes
         const categoryStyles = {
@@ -278,7 +231,7 @@ Results
         }
 
         // Array of topics for query
-        const topicsList = [
+        /* const topicsList = [
             'computer',
             'computer science',
             'maths',
@@ -290,94 +243,49 @@ Results
             'AI',
             'learning',
             // Add more topics as needed
-        ];
+        ]; */
 
-        // Function to fetch data for a specific topic
-        async function fetchDataForTopic(topic) {
-            const apiKey = 'e7d2a943f2mshab5d5c0085b1ddcp144bf7jsnbb359a3107a0';
-            const apiUrl = `https://wikipedia-api1.p.rapidapi.com/get_summary?q=${topic}&lang=en&sentences=3`;
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'GET',
-                    headers: {
-                        'X-RapidAPI-Key': apiKey,
-                        'X-RapidAPI-Host': 'wikipedia-api1.p.rapidapi.com'
-                    }
-                });
-
+        // Function to fetch new study materials
+            async function fetchNewStudyMaterials() {
+                const response = await fetch('/study_materials');
                 if (response.ok) {
-                    const data = await response.json();
-                    console.log('Raw Response for', topic, ':', data);
-
-                    return {
-                        name: topic,
-                        data: data.data
-                    };
+                    const newData = await response.json();
+                    updateStudyMaterials(newData);
                 } else {
-                    console.error('Error fetching data for', topic, ':', response.status, response.statusText);
-                    return null;
-                }
-            } catch (error) {
-                console.error('Error fetching data for', topic, ':', error);
-                return null;
-            }
-        }
-
-        // Function to fetch data for random topics
-        async function fetchRandomTopics() {
-            const selectedTopics = [];
-            const delay = 1000;
-            while (selectedTopics.length < 6 && topicsList.length > 0) {
-                const randomIndex = Math.floor(Math.random() * topicsList.length);
-                const randomTopic = topicsList.splice(randomIndex, 1)[0];
-                const topicData = await fetchDataForTopic(randomTopic);
-                if (topicData) {
-                    selectedTopics.push(topicData);
+                    console.error('Error fetching new study materials:', response.status, response.statusText);
                 }
             }
-            for (const topic of topicsList) {
-                const topicData = await fetchDataForTopic(topic);
-                if (topicData) {
-                    selectedTopics.push(topicData);
-                }
 
-                // Introduce a delay between requests
-                await new Promise(resolve => setTimeout(resolve, delay));
+            // Function to update study materials with new data
+            function updateStudyMaterials(newData) {
+                const studyCardsContainer = document.getElementById('study-cards');
+                studyCardsContainer.innerHTML = ''; // Clear existing data
+
+                // Iterate through the new data and append study material cards
+                newData.forEach(material => {
+                    const studyCard = document.createElement('div');
+                    studyCard.classList.add('content', 'p-4', 'hover:p-6', 'rounded-lg', 'bg-purple-400', 'w-40', 'hover:w-48', 'hover:h-48', 'shadow', 'shadow-2xl', 'opacity-75', 'hover:opacity-100', 'h-40', 'transition-all', 'duration-300', 'flex', 'flex-col', 'justify-between');
+
+                    studyCard.innerHTML = `
+                <h3 class="text-xl font-semibold mb-2">${material.title}</h3>
+                <p class="text-gray-600 mb-2">${material.age_group} - ${material.category}</p>
+                <p class="text-gray-800 mb-4">${material.short_description}</p>
+                <a href="${material.link}" class="text-blue-500 hover:underline" target="_blank">Learn More</a>
+            `;
+
+                    studyCardsContainer.appendChild(studyCard);
+                });
             }
-            return selectedTopics;
-        }
 
+            // Fetch unique study materials when the button is clicked
+            const fetchStudyMaterialsButton = document.getElementById('fetchStudyMaterialsButton');
+            fetchStudyMaterialsButton.addEventListener('click', fetchNewStudyMaterials);
 
         // Fetch and display Flask flash messages
         document.addEventListener("DOMContentLoaded", function () {
             /* Study Material */
-            const fetchTopicsButton = document.getElementById('fetchTopicsButton');
-            const container = document.getElementById('study-cards');
-
-            // Function to update study cards with fetched data
-            async function updateStudyCards() {
-                const selectedTopics = await fetchRandomTopics();
-                const studyCardElements = container.getElementsByClassName('content');
-                Array.from(studyCardElements).forEach((studyCard, index) => {
-                    const topic = selectedTopics[index];
-
-                    // Display the data on the study card
-                    if (topic) {
-                        studyCard.innerHTML = `
-                    <h3 class="mb-4">${topic.name}</h3>
-                    <p>${topic.data}</p>
-                `;
-                    }
-                });
-                console.log('Data fetched successfully for random topics:', selectedTopics);
-            }
-
-            // Fetch initial data when the page loads
-            updateStudyCards();
-
-            // Fetch new data when the user clicks on the button
-            fetchTopicsButton.addEventListener('click', updateStudyCards);
+            fetchNewStudyMaterials()
+            
 
             /* Oppertunities */
             /* I want to add a logic (when page loads the default job value should taken by api and show jobs on opportunities) */

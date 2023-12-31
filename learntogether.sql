@@ -31,15 +31,6 @@ CREATE TABLE announcements (
     author TEXT
 );
 
--- -- Upcoming Events
--- CREATE TABLE upcoming_events (
---     id INTEGER PRIMARY KEY AUTOINCREMENT,
---     event_name TEXT NOT NULL,
---     event_date DATE NOT NULL,
---     location TEXT,
---     description TEXT
--- );
-
 -- -- Assignment Reminders
 CREATE TABLE assignment (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -71,32 +62,6 @@ CREATE TABLE study_materials (
 --     exam_time TIME NOT NULL,
 --     exam_room TEXT
 -- );
-
--- -- Important School Updates
--- CREATE TABLE school_updates (
---     id INTEGER PRIMARY KEY AUTOINCREMENT,
---     update_title TEXT NOT NULL,
---     update_content TEXT NOT NULL,
---     posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
--- );
-
--- -- Scholarship Opportunities
--- CREATE TABLE scholarship_opportunities (
---     id INTEGER PRIMARY KEY AUTOINCREMENT,
---     scholarship_title TEXT NOT NULL,
---     deadline DATE NOT NULL,
---     requirements TEXT NOT NULL
--- );
-
--- -- Internship/Job Opportunities
--- CREATE TABLE job_opportunities (
---     id INTEGER PRIMARY KEY AUTOINCREMENT,
---     opportunity_title TEXT NOT NULL,
---     company_name TEXT NOT NULL,
---     description TEXT NOT NULL,
---     posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
--- );
-
 
 
 -- .save and .read: Save and load SQL commands from a file.

@@ -1,7 +1,9 @@
 # helpers.py
 from flask import session, redirect, flash, url_for, render_template
 from functools import wraps
+from cs50 import SQL
 import secrets, re
+import random
 
 def flash_message(message, category='default'):
     # flash(message, category=category)
@@ -39,3 +41,29 @@ def login_required(f):
 # Generating secret key for session
 def generate_secret_key(length=32):
     return secrets.token_hex(length // 2)
+
+
+# Query data from database
+def get_new_study_materials(db, session):
+    """Fetch study materials from the database."""
+    # Fetch all study materials from the database
+    all_study_materials = db.execute('SELECT * FROM study_materials')
+    
+    # Get the list of materials already shown
+    shown_materials = session.get('shown_materials', [])
+     # Find unique materials that haven't been shown
+    unique_materials = [material for material in all_study_materials if material['id'] not in shown_materials]
+
+    # If all materials have been shown, reset the list
+    if not unique_materials:
+        shown_materials.clear()
+
+    # Choose a random set of materials
+    random.shuffle(unique_materials)
+    selected_materials = unique_materials[:6]
+
+    # Update the list of shown materials in the session
+    shown_materials.extend(material['id'] for material in selected_materials)
+    session['shown_materials'] = shown_materials
+
+    return selected_materials

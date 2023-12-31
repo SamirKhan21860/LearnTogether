@@ -1,11 +1,12 @@
 # Import necessary modules
 import os
 import requests
+from flask import jsonify
 from flask import Flask, request, redirect, url_for, render_template, session
 from flask_session import Session
 from cs50 import SQL
 from werkzeug.security import check_password_hash, generate_password_hash
-from helpers import flash_message, login_required, generate_secret_key, validate_class_name, check_required_fields
+from helpers import flash_message, login_required, generate_secret_key, validate_class_name, check_required_fields, get_new_study_materials
 
 # Create a Flask web application instance
 app = Flask(__name__)
@@ -183,11 +184,13 @@ def complaint():
     # Render the complaints or requests form for GET requests
     return render_template("complaint_or_request.html")
 
-# Define route for search functionality
-@app.route("/search")
-def search():
-    # Render the show_flash template
-    return render_template('show_flash.html')
+
+# Route to render the study materials page
+@app.route('/study_materials', methods=['GET'])
+def study_materials():
+    study_new_materials_data = get_new_study_materials(db, session)
+    return jsonify(study_new_materials_data)
+
 
 # Run the Flask application in debug mode
 if __name__ == '__main__':
