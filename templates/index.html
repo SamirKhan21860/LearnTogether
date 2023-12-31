@@ -41,21 +41,21 @@ Results
             <div id="page-announcements"
                 class="page p-4 m-4 bg-purple-300 rounded-md flex items-start justify-center hidden">
                 <div class="p-4 bg-white rounded-full text-center">
-                    <h2 class="title">Announcements</h2>
+                    <h2 class="title text-lg font-bold text-gray-800">Announcements</h2>
                 </div>
             </div>
 
             <div id="page-classTiming"
                 class="page p-4 m-4 bg-purple-400 rounded-md flex items-start justify-center hidden">
                 <div class="p-4 bg-white rounded-full text-center">
-                    <h2>Class Timing</h2>
+                    <h2 class="text-lg font-bold text-gray-800">Class Timing</h2>
                 </div>
             </div>
 
             <div id="page-assignments"
-                class="page p-4 m-4 bg-amber-300 rounded-md overflow-y-auto flex flex-col items-center justify-center hidden">
-                <div class="p-4 mt-10 bg-white rounded-full text-center">
-                    <h2>Assignments</h2>
+                class="page p-4 m-4 bg-amber-300 rounded-md flex flex-col items-center justify-start">
+                <div class="p-4 bg-white rounded-full text-center">
+                    <h2 class="text-lg font-bold text-gray-800">Assignments</h2>
                 </div>
 
                 <!-- Assignment Form -->
@@ -84,7 +84,7 @@ Results
 
 
             <!-- Display Added Assignments -->
-            <div class="mt-8">
+            <div class="mt-8 overflow-auto">
                 <h3 class="text-xl font-bold mb-4">Added Assignments:</h3>
                 <table class="min-w-full table-auto bg-amber-100">
                     <thead>
@@ -109,12 +109,15 @@ Results
         </div>
 
         <!-- Study Materials -->
-        <div id="page-studyMaterials" class="page pl-6 m-4 bg-purple-600 rounded-md flex flex-col items-center justify-center">
-            <div class="p-4 bg-white rounded-full text-center">
-                <h2 class="text-3xl font-bold text-gray-800">Study Materials</h2>
+        <div id="page-studyMaterials" class="page pl-6 m-4 bg-purple-600 rounded-md flex flex-col items-center justify-start hidden">
+            <div class="p-4 my-4 bg-white rounded-full text-center">
+                <h2 class="text-lg font-bold text-gray-800">Study Materials</h2>
             </div>
             <button id="fetchStudyMaterialsButton" class="mt-4 px-6 py-3 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline">Fetch New Data</button>
+<<<<<<< HEAD
             <!-- Study Cards -->
+=======
+>>>>>>> 8659a0dac32c383c1c21751a10d9f2e697e87e80
             <div id="study-cards" class="overflow-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto mt-8 mb-8">
                 <!-- STUDY_CARDS will be ADDED HERE WHEN DOM LOADS CONTENT -->
             </div>
@@ -124,7 +127,7 @@ Results
         <div id="page-scholarshipOpportunities"
             class="page p-4 m-4 bg-purple-700 rounded-md flex flex-col items-center justify-start hidden">
             <div class="p-4 bg-white rounded-full w-auto text-center">
-                <h2>Opportunities</h2>
+                <h2 class="text-lg font-bold text-gray-800">Opportunities</h2>
             </div>
             <div class="serach ml-16 mt-2" id="search">
                 <form id="jobSearchForm">
